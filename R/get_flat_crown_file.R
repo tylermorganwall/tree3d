@@ -1,0 +1,62 @@
+#'@title Get a Flat 3D Crown File
+#'
+#'@description Description
+#'
+#'@param tree Default `"rounded"`. Crown type. Full list of options:
+#'`"columnar"`
+#'`"evergreen1"`
+#'`"evergreen2"`
+#'`"oval"`
+#'`"palm"`
+#'`"rounded"`
+#'`"spreading1"`
+#'`"spreading2"`
+#'`"vase"`
+#'`"weeping"`
+#'@param resolution Default `"medium"`. Level of detail of the tree mesh. All options:
+#'`"low"`
+#'`"medium"`
+#'`"high`
+#'@export
+#'
+#'@return Filename of OBJ file (as `.txt` file)
+#'@examples
+#'#Load an arrow OBJ
+#'get_flat_crown_file(tree = "rounded", resolution = "high")
+get_flat_crown_file = function(tree = "rounded",
+                               resolution = "medium") {
+  tree_types = c("Columnar",
+                 "Evergreen1",
+                 "Evergreen2",
+                 "Oval",
+                 "Palm",
+                 "Rounded",
+                 "Spreading1",
+                 "Spreading2",
+                 "Vase",
+                 "Weeping")
+  tree_types = tolower(tree_types)
+  tree_files =  c("columnar_clean.txt",
+                  "evergreen_1_clean.txt",
+                  "evergreen_2_clean.txt",
+                  "oval_clean.txt",
+                  "palm_clean.txt",
+                  "rounded_clean.txt",
+                  "spreading_1_clean.txt",
+                  "spreading_2_clean.txt",
+                  "vase_clean.txt",
+                  "weeping_clean.txt" )
+  tree = tolower(tree)
+  resolution = tolower(resolution)
+  stopifnot(resolution %in% c("low","medium","high"))
+  resolution_dir = paste0(resolution, "res")
+
+  stopifnot(length(tree) == 1)
+  if(!tree %in% tree_types) {
+    stop("`tree` must be one of the following: c(",
+         paste0(tree_types,collapse = ", "),
+         ")")
+  }
+  tree_file = tree_files[which(tree == tree_types)]
+  system.file("extdata",resolution_dir,tree_file, package="elementslabtrees", mustWork =TRUE)
+}

@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^.+\.zip$
+^.+\.obj$
+^.+\.png$
+^LICENSE\.md$
