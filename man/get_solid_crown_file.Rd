@@ -9,8 +9,8 @@ get_solid_crown_file(tree = "oval", resolution = "medium")
 \arguments{
 \item{tree}{Default \code{"oval"}. Crown type. Full list of options:
 \verb{"columnar}"
-\verb{"evergreen1}"
-\verb{"evergreen2}"
+\verb{"pyramidal1}"
+\verb{"pyramidal2}"
 \verb{"oval}"
 \verb{"spreading1}"
 \verb{"weeping}"}

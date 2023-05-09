@@ -9,8 +9,8 @@ get_flat_crown_file(tree = "rounded", resolution = "medium")
 \arguments{
 \item{tree}{Default \code{"rounded"}. Crown type. Full list of options:
 \code{"columnar"}
-\code{"evergreen1"}
-\code{"evergreen2"}
+\code{"pyramidal1"}
+\code{"pyramidal2"}
 \code{"oval"}
 \code{"palm"}
 \code{"rounded"}

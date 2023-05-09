@@ -5,18 +5,18 @@
 #' @param crown_type Default `"oval"`. Crown type. Full list of options
 #' (star indicates both flat and solid variants available, no star indicates only flat version available):
 #'
-#'| **3D/Flat** | **Name**   |
-#'| :----------: | :----------------: |
-#'| Both       | `"columnar"`   |
-#'| Both       | `"evergreen1"` |
-#'| Both       | `"evergreen2"` |
-#'| Both       | `"weeping"`    |
-#'| Both       | `"spreading1"` |
-#'| Both       | `"oval"`       |
-#'| Flat-only  | `"palm"`       |
-#'| Flat-only  | `"rounded"`    |
-#'| Flat-only  | `"spreading2"` |
-#'| Flat-only  | `"vase"`       |
+#'| **3D/Flat** | **Name** | **Crown Color** |
+#'| :----------: | :----------------: | :--------: |
+#'| Both       | `"columnar"`   | `"#A2C683"` \figure{columnar_square.png}   |
+#'| Both       | `"pyramidal1"` | `"#066038"` \figure{pyramidal1_square.png} |
+#'| Both       | `"pyramidal2"` | `"#447765"` \figure{pyramidal2_square.png} |
+#'| Both       | `"weeping"`    | `"#CBD362"` \figure{weeping_square.png}    |
+#'| Both       | `"spreading1"` | `"#CCB471"` \figure{spreading1_square.png} |
+#'| Both       | `"oval"`       | `"#7CB262"` \figure{oval_square.png}       |
+#'| Flat-only  | `"palm"`       | `"#DB8952"` \figure{palm_square.png}       |
+#'| Flat-only  | `"rounded"`    | `"#E0A854"` \figure{rounded_square.png}    |
+#'| Flat-only  | `"spreading2"` | `"#75C165"` \figure{spreading2_square.png} |
+#'| Flat-only  | `"vase"`       | `"#AECCB1"` \figure{vase_square.png}       |
 #' @param solid Default `FALSE`. Whether the crown should be a solid mesh, or a collection of flat
 #' 2D planes.
 #' @param position Default `c(0,0,0)`. X/Y/Z position of the mesh.
@@ -30,8 +30,8 @@
 #' @param crown_diameter Default `1`. Crown diameter.
 #' @param trunk_height   Default `1`. Trunk height.
 #' @param trunk_diameter Default `0.1`. Trunk diameter.
-#' @param crown_color    Default `0.1`. Crown color.
-#' @param trunk_color    Default `0.1`. Trunk color.
+#' @param crown_color    Default `NA`, use default for crown type. Crown color hex code.
+#' @param trunk_color    Default `"#8C6F5B"`. Trunk color hex code.
 #' @param diffuse_intensity Default `1.0`. Amount of diffuse (shaded) color included in the model.
 #' @param ambient_intensity Default `0.2`. Amount of ambient (constant) color included in the model.
 #'
@@ -39,7 +39,132 @@
 #'
 #'@return `ray_mesh` list object
 #'@examples
-#'#Load a tree
+#'#Load a tree and render it
+#'library(rayvertex)
+#'render_tree_example = function(example_tree_mesh) {
+#'  example_tree_mesh |>
+#'    add_shape(xz_rect_mesh(c(0,0,-9),
+#'                           material = material_list(diffuse="darkgreen",
+#'                           ambient = "darkgreen", diffuse_intensity = 0.7,
+#'                           ambient_intensity = 0.6),
+#'                           scale=25)) |>
+#'    rasterize_scene(lookat=c(0,0.75,0),
+#'                    light_info = directional_light(c(0.3,1,1), intensity = 0.7),
+#'                    lookfrom=c(0,3,10),
+#'                    fov=10,
+#'                    shadow_map_dims = 2,
+#'                    shadow_map_bias = 0.0005,
+#'                    background = "lightblue")
+#'}
+#'#Render a basic 3D crown
+#'tree_mesh("columnar",
+#'          solid = TRUE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'#Render the 2D planar version
+#'tree_mesh("columnar",
+#'          solid = FALSE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'#Change the trunk and crown dimensions
+#'tree_mesh("columnar",
+#'          trunk_height = 0.5,
+#'          crown_height = 1,
+#'          crown_diameter = 0.5,
+#'          solid = TRUE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'#Change the crown and trunk color
+#'tree_mesh("columnar",
+#'          solid = TRUE,
+#'          crown_color = "orange",
+#'          trunk_color = "tan",
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'#Render different tree types
+#'tree_mesh("columnar",
+#'          solid = TRUE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("columnar",
+#'          solid = FALSE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("pyramidal1",
+#'          solid = TRUE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("pyramidal1",
+#'          solid = FALSE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("pyramidal2",
+#'          solid = TRUE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("pyramidal2",
+#'          solid = FALSE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("weeping",
+#'          solid = TRUE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("weeping",
+#'          solid = FALSE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("spreading1",
+#'          solid = TRUE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("spreading1",
+#'          solid = FALSE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("oval",
+#'          solid = TRUE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("oval",
+#'          solid = FALSE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("palm",
+#'          solid = FALSE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("rounded",
+#'          solid = FALSE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("spreading2",
+#'          solid = FALSE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
+#'
+#'tree_mesh("vase",
+#'          solid = FALSE,
+#'          ambient_intensity = 0.3) |>
+#'  render_tree_example()
 tree_mesh = function(crown_type = "oval",
                      position = c(0,0,0),
                      angle = 0,
@@ -48,16 +173,19 @@ tree_mesh = function(crown_type = "oval",
                      filename = NULL,
                      crown_height = 1,
                      crown_diameter  = 1,
-                     trunk_height = 1,
+                     trunk_height = 0.5,
                      trunk_diameter = 0.1,
-                     crown_color = "darkgreen",
-                     trunk_color = "#725c42",
+                     crown_color = NA,
+                     trunk_color = "#8C6F5B",
                      diffuse_intensity = 1.0,
                      ambient_intensity = 0.2) {
   if(solid) {
     crown_file = get_solid_crown_file(crown_type, resolution)
   } else {
     crown_file = get_flat_crown_file(crown_type, resolution)
+  }
+  if(is.na(crown_color)) {
+    crown_color = get_default_tree_color(crown_type)
   }
   tree_data = tree_mesh_data[which(basename(crown_file) == tree_mesh_data$filename), ]
   trunk_offset = -tree_data$trunk_start

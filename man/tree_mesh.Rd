@@ -13,28 +13,28 @@ tree_mesh(
   filename = NULL,
   crown_height = 1,
   crown_diameter = 1,
-  trunk_height = 1,
+  trunk_height = 0.5,
   trunk_diameter = 0.1,
-  crown_color = "darkgreen",
-  trunk_color = "#725c42",
+  crown_color = NA,
+  trunk_color = "#8C6F5B",
   diffuse_intensity = 1,
   ambient_intensity = 0.2
 )
 }
 \arguments{
 \item{crown_type}{Default \code{"oval"}. Crown type. Full list of options
-(star indicates both flat and solid variants available, no star indicates only flat version available):\tabular{cc}{
-   \strong{3D/Flat} \tab \strong{Name} \cr
-   Both \tab \code{"columnar"} \cr
-   Both \tab \code{"evergreen1"} \cr
-   Both \tab \code{"evergreen2"} \cr
-   Both \tab \code{"weeping"} \cr
-   Both \tab \code{"spreading1"} \cr
-   Both \tab \code{"oval"} \cr
-   Flat-only \tab \code{"palm"} \cr
-   Flat-only \tab \code{"rounded"} \cr
-   Flat-only \tab \code{"spreading2"} \cr
-   Flat-only \tab \code{"vase"} \cr
+(star indicates both flat and solid variants available, no star indicates only flat version available):\tabular{ccc}{
+   \strong{3D/Flat} \tab \strong{Name} \tab \strong{Crown Color} \cr
+   Both \tab \code{"columnar"} \tab \code{"#A2C683"} \figure{columnar_square.png} \cr
+   Both \tab \code{"pyramidal1"} \tab \code{"#066038"} \figure{pyramidal1_square.png} \cr
+   Both \tab \code{"pyramidal2"} \tab \code{"#447765"} \figure{pyramidal2_square.png} \cr
+   Both \tab \code{"weeping"} \tab \code{"#CBD362"} \figure{weeping_square.png} \cr
+   Both \tab \code{"spreading1"} \tab \code{"#CCB471"} \figure{spreading1_square.png} \cr
+   Both \tab \code{"oval"} \tab \code{"#7CB262"} \figure{oval_square.png} \cr
+   Flat-only \tab \code{"palm"} \tab \code{"#DB8952"} \figure{palm_square.png} \cr
+   Flat-only \tab \code{"rounded"} \tab \code{"#E0A854"} \figure{rounded_square.png} \cr
+   Flat-only \tab \code{"spreading2"} \tab \code{"#75C165"} \figure{spreading2_square.png} \cr
+   Flat-only \tab \code{"vase"} \tab \code{"#AECCB1"} \figure{vase_square.png} \cr
 }}
 
 \item{position}{Default \code{c(0,0,0)}. X/Y/Z position of the mesh.}
@@ -59,9 +59,9 @@ tree_mesh(
 
 \item{trunk_diameter}{Default \code{0.1}. Trunk diameter.}
 
-\item{crown_color}{Default \code{0.1}. Crown color.}
+\item{crown_color}{Default \code{NA}, use default for crown type. Crown color hex code.}
 
-\item{trunk_color}{Default \code{0.1}. Trunk color.}
+\item{trunk_color}{Default \code{"#8C6F5B"}. Trunk color hex code.}
 
 \item{diffuse_intensity}{Default \code{1.0}. Amount of diffuse (shaded) color included in the model.}
 
@@ -74,5 +74,130 @@ tree_mesh(
 Loads an tree OBJ file as a \code{ray_mesh} object.
 }
 \examples{
-#Load a tree
+#Load a tree and render it
+library(rayvertex)
+render_tree_example = function(example_tree_mesh) {
+ example_tree_mesh |>
+   add_shape(xz_rect_mesh(c(0,0,-9),
+                          material = material_list(diffuse="darkgreen",
+                          ambient = "darkgreen", diffuse_intensity = 0.7,
+                          ambient_intensity = 0.6),
+                          scale=25)) |>
+   rasterize_scene(lookat=c(0,0.75,0),
+                   light_info = directional_light(c(0.3,1,1), intensity = 0.7),
+                   lookfrom=c(0,3,10),
+                   fov=10,
+                   shadow_map_dims = 2,
+                   shadow_map_bias = 0.0005,
+                   background = "lightblue")
+}
+#Render a basic 3D crown
+tree_mesh("columnar",
+         solid = TRUE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+#Render the 2D planar version
+tree_mesh("columnar",
+         solid = FALSE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+#Change the trunk and crown dimensions
+tree_mesh("columnar",
+         trunk_height = 0.5,
+         crown_height = 1,
+         crown_diameter = 0.5,
+         solid = TRUE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+#Change the crown and trunk color
+tree_mesh("columnar",
+         solid = TRUE,
+         crown_color = "orange",
+         trunk_color = "tan",
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+#Render different tree types
+tree_mesh("columnar",
+         solid = TRUE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("columnar",
+         solid = FALSE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("pyramidal1",
+         solid = TRUE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("pyramidal1",
+         solid = FALSE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("pyramidal2",
+         solid = TRUE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("pyramidal2",
+         solid = FALSE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("weeping",
+         solid = TRUE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("weeping",
+         solid = FALSE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("spreading1",
+         solid = TRUE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("spreading1",
+         solid = FALSE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("oval",
+         solid = TRUE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("oval",
+         solid = FALSE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("palm",
+         solid = FALSE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("rounded",
+         solid = FALSE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("spreading2",
+         solid = FALSE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+tree_mesh("vase",
+         solid = FALSE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
 }

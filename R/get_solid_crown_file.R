@@ -4,8 +4,8 @@
 #'
 #'@param tree Default `"oval"`. Crown type. Full list of options:
 #'`"columnar`"
-#'`"evergreen1`"
-#'`"evergreen2`"
+#'`"pyramidal1`"
+#'`"pyramidal2`"
 #'`"oval`"
 #'`"spreading1`"
 #'`"weeping`"
@@ -22,8 +22,8 @@
 get_solid_crown_file = function(tree = "oval",
                                 resolution = "medium") {
   tree_types = c("Columnar",
-                 "Evergreen1",
-                 "Evergreen2",
+                 "Pyramidal1",
+                 "Pyramidal2",
                  "Oval",
                  "Spreading1",
                  "Spreading",

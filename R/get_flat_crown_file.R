@@ -4,8 +4,8 @@
 #'
 #'@param tree Default `"rounded"`. Crown type. Full list of options:
 #'`"columnar"`
-#'`"evergreen1"`
-#'`"evergreen2"`
+#'`"pyramidal1"`
+#'`"pyramidal2"`
 #'`"oval"`
 #'`"palm"`
 #'`"rounded"`
@@ -26,8 +26,8 @@
 get_flat_crown_file = function(tree = "rounded",
                                resolution = "medium") {
   tree_types = c("Columnar",
-                 "Evergreen1",
-                 "Evergreen2",
+                 "Pyramidal1",
+                 "Pyramidal2",
                  "Oval",
                  "Palm",
                  "Rounded",
