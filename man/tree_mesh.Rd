@@ -120,7 +120,7 @@ tree_mesh("columnar",
          ambient_intensity = 0.3) |>
  render_tree_example()
 
-#Render different tree types
+#Render different tree types, both 2D and 3D versions
 tree_mesh("columnar",
          solid = TRUE,
          ambient_intensity = 0.3) |>
