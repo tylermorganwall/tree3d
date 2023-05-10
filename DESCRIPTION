@@ -18,3 +18,4 @@ Depends:
     R (>= 2.10)
 Roxygen: list(markdown = TRUE)
 URL: https://tylermorganwall.github.io/elementslabtrees/
+Remotes: tylermorganwall/rayvertex
