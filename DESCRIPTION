@@ -1,14 +1,13 @@
-Package: elementslabtrees
+Package: tree3d
 Type: Package
 Title: 3D Tree Models
 Version: 0.1.0
 Authors@R: c(person("Tyler", "Morgan-Wall", email = "tylermw@gmail.com", 
     role = c("aut", "cph", "cre"), comment = c(ORCID = "0000-0002-3131-3814")),
-    person("Semi", "Miller", role=c("aut", "cph")),
+    person("Samantha", "Miller", role=c("aut", "cph")),
     person("Agatha", "Czekajlo", role=c("aut", "cph")))
 Maintainer: Tyler Morgan-Wall <tylermw@gmail.com>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Provides customizable 3D tree models (as 'OBJ' files) for visualization. Includes both planar and solid tree models, various crown types (columnar, oval, palm, pyramidal, rounded, spreading, vase, weeping), and options to change the diameter, height, and color of the tree's crown and trunk.  
 License: MIT + file LICENSE
 Imports: rayvertex (>= 0.7.6)
 Encoding: UTF-8
