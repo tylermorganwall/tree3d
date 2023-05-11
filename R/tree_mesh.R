@@ -29,7 +29,7 @@
 #' @param filename Default `NULL`. Filename of the OBJ file, if saving the mesh to a local file.
 #' @param crown_height   Default `1`. A numeric value setting the height of the crown.
 #' @param crown_diameter Default `1`. A numeric value setting the diameter of the crown.
-#' @param trunk_height   Default `1`. A nudsadsadassadmeric value setting the height of the trunk.
+#' @param trunk_height   Default `1`. A numeric value setting the height of the trunk.
 #' @param trunk_diameter Default `0.1`. A numeric value setting the diameter of the trunk.
 #' @param crown_color    Default `NA`, use default for crown type. A string specifying the hex code of the crown color.
 #' @param trunk_color    Default `"#8C6F5B"`. A string specifying the hex code of the trunk color.
