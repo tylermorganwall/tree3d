@@ -2,9 +2,7 @@
 #'
 #'@description Loads an tree OBJ file as a `ray_mesh` object.
 #'
-#' @param crown_type Default `"oval"`. Crown type. Full list of options
-#' (star indicates both flat and solid variants available, no star indicates only flat version available):
-#'
+#' @param crown_type Default `"oval"`. Crown type. Full list of options:
 #'| **3D/Flat** | **Name** | **Crown Color** |
 #'| :----------: | :----------------: | :--------: |
 #'| Both       | `"columnar"`   | `"#A2C683"` \figure{columnar_square.png}   |
