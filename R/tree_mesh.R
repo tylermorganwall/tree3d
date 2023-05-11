@@ -1,8 +1,11 @@
-#'@title Tree Mesh
+#'@title Generate a Tree Mesh
 #'
-#'@description Loads an tree OBJ file as a `ray_mesh` object.
+#'@description This function generates a tree model and transforms it into a `ray_mesh` object or an OBJ file.
+#' The tree model consists of two main parts: the crown (leafy part) and the trunk. Both parts can be customized according
+#' to a range of preset types, as well as full control over the tree's colors and dimensions.
+#' The tree model can be positioned, scaled, and rotated in 3D space.
 #'
-#' @param crown_type Default `"oval"`. Crown type. Full list of options:
+#' @param crown_type Default `"oval"`. Crown type (the leafy part of the tree). Full list of options:
 #'| **3D/Flat** | **Name** | **Crown Color** |
 #'| :----------: | :----------------: | :--------: |
 #'| Both       | `"columnar"`   | `"#A2C683"` \figure{columnar_square.png}   |
@@ -15,23 +18,23 @@
 #'| Flat-only  | `"rounded"`    | `"#E0A854"` \figure{rounded_square.png}    |
 #'| Flat-only  | `"spreading2"` | `"#75C165"` \figure{spreading2_square.png} |
 #'| Flat-only  | `"vase"`       | `"#AECCB1"` \figure{vase_square.png}       |
-#' @param solid Default `FALSE`. Whether the crown should be a solid mesh, or a collection of flat
-#' 2D planes.
-#' @param position Default `c(0,0,0)`. X/Y/Z position of the mesh.
+#' @param solid Default `FALSE`. Whether the crown should be a solid mesh (`TRUE`), or a collection of flat
+#' 2D planes (`FALSE`).
+#' @param position Default `c(0,0,0)`. A length-3 numeric vector specifying the X, Y, and Z coordinates of the tree mesh in 3D space.
 #' @param angle Default `0`. Amount of rotation around the y-axis for the tree.
-#' @param resolution Default `"medium"`. Level of detail of the tree mesh. All options:
+#' @param resolution Default `"medium"`. String indicating the level of detail of the tree mesh. All options:
 #'`"low"`
 #'`"medium"`
 #'`"high`
 #' @param filename Default `NULL`. Filename of the OBJ file, if saving the mesh to a local file.
-#' @param crown_height   Default `1`. Crown height.
-#' @param crown_diameter Default `1`. Crown diameter.
-#' @param trunk_height   Default `1`. Trunk height.
-#' @param trunk_diameter Default `0.1`. Trunk diameter.
-#' @param crown_color    Default `NA`, use default for crown type. Crown color hex code.
-#' @param trunk_color    Default `"#8C6F5B"`. Trunk color hex code.
-#' @param diffuse_intensity Default `1.0`. Amount of diffuse (shaded) color included in the model.
-#' @param ambient_intensity Default `0.2`. Amount of ambient (constant) color included in the model.
+#' @param crown_height   Default `1`. A numeric value setting the height of the crown.
+#' @param crown_diameter Default `1`. A numeric value setting the diameter of the crown.
+#' @param trunk_height   Default `1`. A numeric value setting the height of the trunk.
+#' @param trunk_diameter Default `0.1`. A numeric value setting the diameter of the trunk.
+#' @param crown_color    Default `NA`, use default for crown type. A string specifying the hex code of the crown color.
+#' @param trunk_color    Default `"#8C6F5B"`. A string specifying the hex code of the trunk color.
+#' @param diffuse_intensity Default `1.0`. A numeric value controlling the amount of diffuse (shaded) color included in the model.
+#' @param ambient_intensity Default `0.2`. A numeric value controlling the amount of ambient (constant) color included in the model.
 #'
 #'@export
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/tree_mesh.R
 \name{tree_mesh}
 \alias{tree_mesh}
-\title{Tree Mesh}
+\title{Generate a Tree Mesh}
 \usage{
 tree_mesh(
   crown_type = "oval",
@@ -22,8 +22,7 @@ tree_mesh(
 )
 }
 \arguments{
-\item{crown_type}{Default \code{"oval"}. Crown type. Full list of options
-(star indicates both flat and solid variants available, no star indicates only flat version available):\tabular{ccc}{
+\item{crown_type}{Default \code{"oval"}. Crown type (the leafy part of the tree). Full list of options:\tabular{ccc}{
    \strong{3D/Flat} \tab \strong{Name} \tab \strong{Crown Color} \cr
    Both \tab \code{"columnar"} \tab \code{"#A2C683"} \figure{columnar_square.png} \cr
    Both \tab \code{"pyramidal1"} \tab \code{"#066038"} \figure{pyramidal1_square.png} \cr
@@ -37,41 +36,44 @@ tree_mesh(
    Flat-only \tab \code{"vase"} \tab \code{"#AECCB1"} \figure{vase_square.png} \cr
 }}
 
-\item{position}{Default \code{c(0,0,0)}. X/Y/Z position of the mesh.}
+\item{position}{Default \code{c(0,0,0)}. A length-3 numeric vector specifying the X, Y, and Z coordinates of the tree mesh in 3D space.}
 
 \item{angle}{Default \code{0}. Amount of rotation around the y-axis for the tree.}
 
-\item{solid}{Default \code{FALSE}. Whether the crown should be a solid mesh, or a collection of flat
-2D planes.}
+\item{solid}{Default \code{FALSE}. Whether the crown should be a solid mesh (\code{TRUE}), or a collection of flat
+2D planes (\code{FALSE}).}
 
-\item{resolution}{Default \code{"medium"}. Level of detail of the tree mesh. All options:
+\item{resolution}{Default \code{"medium"}. String indicating the level of detail of the tree mesh. All options:
 \code{"low"}
 \code{"medium"}
 \verb{"high}}
 
 \item{filename}{Default \code{NULL}. Filename of the OBJ file, if saving the mesh to a local file.}
 
-\item{crown_height}{Default \code{1}. Crown height.}
+\item{crown_height}{Default \code{1}. A numeric value setting the height of the crown.}
 
-\item{crown_diameter}{Default \code{1}. Crown diameter.}
+\item{crown_diameter}{Default \code{1}. A numeric value setting the diameter of the crown.}
 
-\item{trunk_height}{Default \code{1}. Trunk height.}
+\item{trunk_height}{Default \code{1}. A numeric value setting the height of the trunk.}
 
-\item{trunk_diameter}{Default \code{0.1}. Trunk diameter.}
+\item{trunk_diameter}{Default \code{0.1}. A numeric value setting the diameter of the trunk.}
 
-\item{crown_color}{Default \code{NA}, use default for crown type. Crown color hex code.}
+\item{crown_color}{Default \code{NA}, use default for crown type. A string specifying the hex code of the crown color.}
 
-\item{trunk_color}{Default \code{"#8C6F5B"}. Trunk color hex code.}
+\item{trunk_color}{Default \code{"#8C6F5B"}. A string specifying the hex code of the trunk color.}
 
-\item{diffuse_intensity}{Default \code{1.0}. Amount of diffuse (shaded) color included in the model.}
+\item{diffuse_intensity}{Default \code{1.0}. A numeric value controlling the amount of diffuse (shaded) color included in the model.}
 
-\item{ambient_intensity}{Default \code{0.2}. Amount of ambient (constant) color included in the model.}
+\item{ambient_intensity}{Default \code{0.2}. A numeric value controlling the amount of ambient (constant) color included in the model.}
 }
 \value{
 \code{ray_mesh} list object
 }
 \description{
-Loads an tree OBJ file as a \code{ray_mesh} object.
+This function generates a tree model and transforms it into a \code{ray_mesh} object or an OBJ file.
+The tree model consists of two main parts: the crown (leafy part) and the trunk. Both parts can be customized according
+to a range of preset types, as well as full control over the tree's colors and dimensions.
+The tree model can be positioned, scaled, and rotated in 3D space.
 }
 \examples{
 #Load a tree and render it
