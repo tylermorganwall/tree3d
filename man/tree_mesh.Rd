@@ -79,8 +79,8 @@ library(rayvertex)
 render_tree_example = function(example_tree_mesh) {
  example_tree_mesh |>
    add_shape(xz_rect_mesh(c(0,0,-9),
-                          material = material_list(diffuse="darkgreen",
-                          ambient = "darkgreen", diffuse_intensity = 0.7,
+                          material = material_list(diffuse="tan",
+                          ambient = "grey", diffuse_intensity = 0.7,
                           ambient_intensity = 0.6),
                           scale=25)) |>
    rasterize_scene(lookat=c(0,0.75,0),
