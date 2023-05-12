@@ -29,13 +29,16 @@ get_flat_crown_file(
 \verb{"high}}
 
 \item{offset_origin}{Default \code{TRUE}. Whether to offset the crown so that the bottom of the
-tree will be exactly at the originm, aligning it with the trunk.}
+tree will be exactly at the origin, aligning it with the trunk.}
 }
 \value{
 Filename of OBJ file (as \code{.txt} file)
 }
 \description{
-Description
+Generate a specific 3D representation of a planar tree crown,
+given the parameters for the type of tree crown, the desired level of detail
+or resolution, and whether or not to offset the crown to align it with the
+trunk at the origin.
 }
 \examples{
 #Load an arrow OBJ

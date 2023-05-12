@@ -1,6 +1,9 @@
 #'@title Get a Solid 3D Crown File
 #'
-#'@description Description
+#'@description Generate a specific 3D representation of a tree crown,
+#'given the parameters for the type of tree crown, the desired level of detail
+#'or resolution, and whether or not to offset the crown to align it with the
+#'trunk at the origin.
 #'
 #'@param tree Default `"oval"`. Crown type. Full list of options:
 #'`"columnar`"
