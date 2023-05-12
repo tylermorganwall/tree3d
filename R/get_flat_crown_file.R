@@ -58,5 +58,5 @@ get_flat_crown_file = function(tree = "rounded",
          ")")
   }
   tree_file = tree_files[which(tree == tree_types)]
-  system.file("extdata",resolution_dir,tree_file, package="elementslabtrees", mustWork =TRUE)
+  system.file("extdata",resolution_dir,tree_file, package="tree3d", mustWork =TRUE)
 }

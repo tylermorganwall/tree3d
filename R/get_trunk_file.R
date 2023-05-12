@@ -9,5 +9,5 @@
 #'#Load an arrow OBJ
 #'get_trunk_file()
 get_trunk_file = function() {
-  system.file("extdata", "trunk", "trunk_clean.txt", package="elementslabtrees", mustWork = TRUE)
+  system.file("extdata", "trunk", "trunk_clean.txt", package="tree3d", mustWork = TRUE)
 }
