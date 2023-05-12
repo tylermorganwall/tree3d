@@ -107,7 +107,8 @@ tree_mesh("columnar",
 
 #Change the trunk and crown dimensions
 tree_mesh("columnar",
-         trunk_height = 0.5,
+         trunk_height = 0.25,
+         trunk_diameter = 0.05,
          crown_height = 1,
          crown_diameter = 0.5,
          solid = TRUE,

@@ -19,5 +19,8 @@ write_tree_to_obj = function(tree_mesh,
                              materials = TRUE,
                              fileext = ".obj") {
   stopifnot(!missing(filename))
-  rayvertex::write_scene_to_obj(tree_mesh, filename = filename, materials = materials)
+  rayvertex::write_scene_to_obj(tree_mesh,
+                                filename = filename,
+                                materials = materials,
+                                fileext = fileext)
 }

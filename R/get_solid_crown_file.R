@@ -13,6 +13,8 @@
 #'`"low"`
 #'`"medium"`
 #'`"high`
+#'@param offset_origin Default `TRUE`. Whether to offset the crown so that the bottom of the
+#'tree will be exactly at the origin, aligning it with the trunk.
 #'@export
 #'
 #'@return Filename of OBJ file (as `.txt` file)
@@ -20,7 +22,8 @@
 #'#Load an arrow OBJ
 #'get_solid_crown_file(tree = "oval", resolution = "high")
 get_solid_crown_file = function(tree = "oval",
-                                resolution = "medium") {
+                                resolution = "medium",
+                                offset_origin = TRUE) {
   tree_types = c("Columnar",
                  "Pyramidal1",
                  "Pyramidal2",
@@ -36,6 +39,16 @@ get_solid_crown_file = function(tree = "oval",
                   "spreading_1_crown_clean.txt",
                   "spreading_1_crown_clean.txt",
                   "weeping_crown_clean.txt" )
+
+  if(offset_origin) {
+    tree_files =  c("columnar_crown_clean_offset.txt",
+                    "evergreen_1_crown_clean_offset.txt",
+                    "evergreen_2_crown_clean_offset.txt",
+                    "oval_crown_clean_offset.txt",
+                    "spreading_1_crown_clean_offset.txt",
+                    "spreading_1_crown_clean_offset.txt",
+                    "weeping_crown_clean_offset.txt" )
+  }
   tree = tolower(tree)
   resolution = tolower(resolution)
   stopifnot(resolution %in% c("low","medium","high"))

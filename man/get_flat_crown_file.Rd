@@ -4,7 +4,11 @@
 \alias{get_flat_crown_file}
 \title{Get a Flat 3D Crown File}
 \usage{
-get_flat_crown_file(tree = "rounded", resolution = "medium")
+get_flat_crown_file(
+  tree = "rounded",
+  resolution = "medium",
+  offset_origin = TRUE
+)
 }
 \arguments{
 \item{tree}{Default \code{"rounded"}. Crown type. Full list of options:
@@ -23,6 +27,9 @@ get_flat_crown_file(tree = "rounded", resolution = "medium")
 \code{"low"}
 \code{"medium"}
 \verb{"high}}
+
+\item{offset_origin}{Default \code{TRUE}. Whether to offset the crown so that the bottom of the
+tree will be exactly at the originm, aligning it with the trunk.}
 }
 \value{
 Filename of OBJ file (as \code{.txt} file)

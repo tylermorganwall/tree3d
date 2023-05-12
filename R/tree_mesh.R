@@ -71,7 +71,8 @@
 #'
 #'#Change the trunk and crown dimensions
 #'tree_mesh("columnar",
-#'          trunk_height = 0.5,
+#'          trunk_height = 0.25,
+#'          trunk_diameter = 0.05,
 #'          crown_height = 1,
 #'          crown_diameter = 0.5,
 #'          solid = TRUE,
@@ -181,9 +182,9 @@ tree_mesh = function(crown_type = "oval",
                      diffuse_intensity = 1.0,
                      ambient_intensity = 0.2) {
   if(solid) {
-    crown_file = get_solid_crown_file(crown_type, resolution)
+    crown_file = get_solid_crown_file(crown_type, resolution, offset_origin = TRUE)
   } else {
-    crown_file = get_flat_crown_file(crown_type, resolution)
+    crown_file = get_flat_crown_file(crown_type, resolution, offset_origin = TRUE)
   }
   if(is.na(crown_color)) {
     crown_color = get_default_tree_color(crown_type)
@@ -192,7 +193,7 @@ tree_mesh = function(crown_type = "oval",
   trunk_offset = -tree_data$trunk_start
   crown_aspect = tree_data$aspect_ratio
 
-  crown_mesh = rayvertex::obj_mesh(crown_file, position = c(0,trunk_offset, 0),
+  crown_mesh = rayvertex::obj_mesh(crown_file,
                                    material = rayvertex::material_list(diffuse = crown_color,
                                                                        ambient = crown_color,
                                                                        diffuse_intensity = diffuse_intensity,
