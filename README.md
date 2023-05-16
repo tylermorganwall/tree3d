@@ -1,5 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/tylermorganwall/tree3d/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tylermorganwall/tree3d/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
 # tree3d: 3D Tree Models
 
