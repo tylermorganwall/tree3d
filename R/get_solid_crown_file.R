@@ -32,14 +32,12 @@ get_solid_crown_file = function(tree = "oval",
                  "Pyramidal2",
                  "Oval",
                  "Spreading1",
-                 "Spreading",
                  "Weeping")
   tree_types = tolower(tree_types)
   tree_files =  c("columnar_crown_clean.txt",
                   "evergreen_1_crown_clean.txt",
                   "evergreen_2_crown_clean.txt",
                   "oval_crown_clean.txt",
-                  "spreading_1_crown_clean.txt",
                   "spreading_1_crown_clean.txt",
                   "weeping_crown_clean.txt" )
 
@@ -48,7 +46,6 @@ get_solid_crown_file = function(tree = "oval",
                     "evergreen_1_crown_clean_offset.txt",
                     "evergreen_2_crown_clean_offset.txt",
                     "oval_crown_clean_offset.txt",
-                    "spreading_1_crown_clean_offset.txt",
                     "spreading_1_crown_clean_offset.txt",
                     "weeping_crown_clean_offset.txt" )
   }
