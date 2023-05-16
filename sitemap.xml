@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tylermorganwall.github.io/elementslabtrees/404.html</loc>
+    <loc>/404.html</loc>
   </url>
   <url>
-    <loc>https://tylermorganwall.github.io/elementslabtrees/LICENSE-text.html</loc>
+    <loc>/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://tylermorganwall.github.io/elementslabtrees/LICENSE.html</loc>
+    <loc>/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://tylermorganwall.github.io/elementslabtrees/authors.html</loc>
+    <loc>/authors.html</loc>
   </url>
   <url>
-    <loc>https://tylermorganwall.github.io/elementslabtrees/index.html</loc>
+    <loc>/index.html</loc>
   </url>
   <url>
-    <loc>https://tylermorganwall.github.io/elementslabtrees/reference/get_default_tree_color.html</loc>
+    <loc>/reference/get_crown_file.html</loc>
   </url>
   <url>
-    <loc>https://tylermorganwall.github.io/elementslabtrees/reference/get_flat_crown_file.html</loc>
+    <loc>/reference/get_default_tree_color.html</loc>
   </url>
   <url>
-    <loc>https://tylermorganwall.github.io/elementslabtrees/reference/get_solid_crown_file.html</loc>
+    <loc>/reference/get_flat_crown_file.html</loc>
   </url>
   <url>
-    <loc>https://tylermorganwall.github.io/elementslabtrees/reference/get_trunk_file.html</loc>
+    <loc>/reference/get_solid_crown_file.html</loc>
   </url>
   <url>
-    <loc>https://tylermorganwall.github.io/elementslabtrees/reference/index.html</loc>
+    <loc>/reference/get_tree_data.html</loc>
   </url>
   <url>
-    <loc>https://tylermorganwall.github.io/elementslabtrees/reference/tree_mesh.html</loc>
+    <loc>/reference/get_trunk_file.html</loc>
   </url>
   <url>
-    <loc>https://tylermorganwall.github.io/elementslabtrees/reference/write_tree_to_obj.html</loc>
+    <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tree_mesh.html</loc>
+  </url>
+  <url>
+    <loc>/reference/write_tree_to_obj.html</loc>
   </url>
 </urlset>
