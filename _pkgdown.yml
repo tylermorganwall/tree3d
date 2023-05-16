@@ -1,4 +1,15 @@
-url: https://tylermorganwall.github.io/tree3d/
+url: ~
 template:
   bootstrap: 5
 
+
+figures:
+  dpi: 96
+  dev.args: []
+  fig.ext: png
+  fig.width: 8
+  fig.height: ~
+  fig.retina: 2
+  fig.asp: 1
+  bg: NA
+  other.parameters: []

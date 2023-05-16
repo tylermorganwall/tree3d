@@ -11,17 +11,6 @@ on:
 
 name: pkgdown
 
-figures:
-  dpi: 96
-  dev.args: []
-  fig.ext: png
-  fig.width: 8
-  fig.height: ~
-  fig.retina: 2
-  fig.asp: 1
-  bg: NA
-  other.parameters: []
-
 jobs:
   pkgdown:
     runs-on: ubuntu-latest
