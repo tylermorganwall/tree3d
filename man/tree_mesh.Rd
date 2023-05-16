@@ -48,7 +48,7 @@ tree_mesh(
 \code{"medium"}
 \verb{"high}}
 
-\item{filename}{Default \code{NULL}. Filename of the OBJ file, if saving the mesh to a local file.}
+\item{filename}{Default \code{NULL}. File name of the OBJ file, if saving the mesh to a local file.}
 
 \item{crown_height}{Default \code{1}. A numeric value setting the height of the crown.}
 

@@ -3,6 +3,7 @@
 export(get_crown_file)
 export(get_flat_crown_file)
 export(get_solid_crown_file)
+export(get_tree_data)
 export(get_trunk_file)
 export(tree_mesh)
 export(write_tree_to_obj)
