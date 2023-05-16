@@ -26,7 +26,7 @@
 #'`"low"`
 #'`"medium"`
 #'`"high`
-#' @param filename Default `NULL`. Filename of the OBJ file, if saving the mesh to a local file.
+#' @param filename Default `NULL`. File name of the OBJ file, if saving the mesh to a local file.
 #' @param crown_height   Default `1`. A numeric value setting the height of the crown.
 #' @param crown_diameter Default `1`. A numeric value setting the diameter of the crown.
 #' @param trunk_height   Default `1`. A numeric value setting the height of the trunk.
@@ -186,12 +186,10 @@ tree_mesh = function(crown_type = "oval",
   } else {
     crown_file = get_flat_crown_file(crown_type, resolution, offset_origin = TRUE)
   }
+
   if(is.na(crown_color)) {
     crown_color = get_default_tree_color(crown_type)
   }
-  tree_data = tree_mesh_data[which(basename(crown_file) == tree_mesh_data$filename), ]
-  trunk_offset = -tree_data$trunk_start
-  crown_aspect = tree_data$aspect_ratio
 
   crown_mesh = rayvertex::obj_mesh(crown_file,
                                    material = rayvertex::material_list(diffuse = crown_color,
@@ -202,8 +200,7 @@ tree_mesh = function(crown_type = "oval",
     rayvertex::scale_mesh(scale = c(crown_diameter,crown_height,crown_diameter)) |>
     rayvertex::translate_mesh(position = c(0,trunk_height,0))
 
-  trunk_diameter = trunk_diameter / 0.1
-  trunk_mesh = rayvertex::obj_mesh(get_trunk_file(), position = c(0,0.5,0),
+  trunk_mesh = rayvertex::obj_mesh(get_trunk_file(offset = TRUE),
                                    material = rayvertex::material_list(diffuse = trunk_color,
                                                                        diffuse_intensity = diffuse_intensity,
                                                                        ambient_intensity = ambient_intensity,
