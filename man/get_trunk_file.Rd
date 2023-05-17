@@ -7,7 +7,9 @@
 get_trunk_file(scaled = TRUE, offset = TRUE)
 }
 \arguments{
-\item{scaled}{Default \code{FALSE}. This parameter determines whether the trunk model should be scaled from a radius of 0.1 to 1. If TRUE, the trunk model will be scaled; otherwise, it will use the original size.}
+\item{scaled}{Default \code{TRUE}. This parameter determines whether the trunk model should be scaled from a radius of 0.1 to 1. If TRUE, the trunk model will be scaled; otherwise, it will use the original size.}
+
+\item{offset}{Default \code{TRUE}. This parameter determines whether the trunk model should be offset to start at the origin, or centered at the origin (\code{FALSE}).}
 }
 \value{
 Returns the filename of the selected OBJ file (as a .txt file) for the tree trunk. This file can be used to create tree trunk models in a 3D scene.
