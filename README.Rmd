@@ -9,8 +9,10 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
-)
+  out.width = "100%",
+  fig.width=8,
+  fig.height=8,
+  dpi=100)
 ```
 
 <!-- badges: start -->
@@ -43,30 +45,29 @@ remotes::install_github("tylermorganwall/tree3d")
 Let's load the sandbox data included in the Github repository. We will then unzip the file, and then load the shapefiles into R using {sf}.
 
 ```{r}
-
 library(tree3d)
 library(sf)
 library(terra)
 library(rayshader)
 
-#Download the sample data
+# Download the sample data
 temp_download = tempfile(fileext = ".zip")
-download.file("https://github.com/tylermorganwall/tree3d/raw/main/inst/extdata/tree3d_sandbox_data.zip",temp_download)
+download.file("https://github.com/tylermorganwall/tree3d/raw/main/inst/extdata/tree3d_sandbox_data.zip", temp_download)
 
-#Unzip and get directory
+# Unzip and get directory
 unzip(temp_download, exdir = tempdir())
 zipdir = paste0(tempdir(), .Platform$file.sep, 
                 "sandbox_data", .Platform$file.sep)
 
-#Load all files
-poly_boundary = sf::st_read(paste0(zipdir,"Area_Boundary_subset.shp"), quiet = TRUE)
-baseline_tree = sf::st_read(paste0(zipdir,"Baseline_Trees_Z_clip.shp"), quiet = TRUE)
-building_baseline = sf::st_read(paste0(zipdir,"Buildings_Baseline_2020_Z_clip.shp"), quiet = TRUE)
-parcels = sf::st_read(paste0(zipdir,"Parcels_2020_clip.shp"), quiet = TRUE)
+# Load all files
+poly_boundary = sf::st_read(paste0(zipdir, "Area_Boundary_subset.shp"), quiet = TRUE)
+baseline_tree = sf::st_read(paste0(zipdir, "Baseline_Trees_Z_clip.shp"), quiet = TRUE)
+building_baseline = sf::st_read(paste0(zipdir, "Buildings_Baseline_2020_Z_clip.shp"), quiet = TRUE)
+parcels = sf::st_read(paste0(zipdir, "Parcels_2020_clip.shp"), quiet = TRUE)
 
-dem = terra::rast(paste0(zipdir,"DEM_2013_subset_zero.tif"))
+dem = terra::rast(paste0(zipdir, "DEM_2013_subset_zero.tif"))
 
-#Inspect the tree data
+# Inspect the tree data
 head(baseline_tree)
 ```
 
@@ -79,35 +80,33 @@ dem_mat |>
   constant_shade("#6dbd83") |>
   add_overlay(generate_polygon_overlay(poly_boundary, extent = ext(dem),
                                        heightmap = dem_mat,
-                                       palette = "#bcebc9"),
-              rescale_original = TRUE) |>
+                                       palette = "#bcebc9")) |>
   add_overlay(generate_polygon_overlay(parcels, extent = ext(dem),
                                        heightmap = dem_mat,
-                                       palette = "#afe0bd"),
-              rescale_original = TRUE) |>
+                                       palette = "#afe0bd")) |>
   plot_3d(dem_mat, background = "lightblue", windowsize = 800)
 
 #Render the buildings as extruded polygons
-render_polygons(building_baseline, extent = ext(dem),
-                data_column_top = "height_ag",
-                clear_previous = TRUE,
-                color = "white",
+render_polygons(building_baseline, 
+                extent = ext(dem), 
+                data_column_top = "height_ag", 
+                clear_previous = TRUE, 
+                color = "white", 
                 heightmap = dem_mat)
-render_camera(theta=44, phi=36,  zoom=0.7, fov=50, shift_vertical = -30)
+render_camera(theta = 44, phi = 36, zoom = 0.7, fov = 50, shift_vertical = -30)
 render_snapshot()
 ```
 
-Now that we have our 3D map generated, let's add our custom trees using rayshader's `render_trees()` function. {tree3d} provides `get_crown_file()` and `get_trunk_file()`, which allows access to the separate 3D models included in the package. Passing in each model separately gives you full control over the size, shape, and colors of the trees.
+Now that we have our 3D map generated, let's add our custom trees using rayshader's `render_trees()` function. `tree3d` provides `get_crown_file()` and `get_trunk_file()`, which allows access to the separate 3D models included in the package. Passing in each model separately gives you full control over the size, shape, and colors of the trees.
 
 ```{r}
-
-#Render the trees, using data from `baseline_tree` to draw each tree individually
+# Render the trees, using data from `baseline_tree` to draw each tree individually
 for(i in seq_len(nrow(baseline_tree))) {
   single_tree_info = baseline_tree[i,]
   latlongheight = as.matrix(st_geometry(single_tree_info)[[1]])
-  render_tree(long = latlongheight[1],lat = latlongheight[2],
-              extent = ext(dem), heightmap = dem_mat,
-              crown_height = single_tree_info$Diameter-1,
+  render_tree(long = latlongheight[1], lat = latlongheight[2], 
+              extent = ext(dem), heightmap = dem_mat, 
+              crown_height = single_tree_info$Diameter - 1,
               crown_width_ratio = 1,
               trunk_height = 1,
               custom_obj_crown = get_crown_file(tree = single_tree_info$CrownType),
@@ -115,6 +114,30 @@ for(i in seq_len(nrow(baseline_tree))) {
 }
 render_camera(40, 23,  0.25, 90)
 render_snapshot()
+```
+
+We can also generate high quality renders with our trees using rayshader:. Here, we use the solid models.
+
+```{r hq}
+render_tree(clear_previous = TRUE)
+for(i in seq_len(nrow(baseline_tree))) {
+  single_tree_info = baseline_tree[i,]
+  latlongheight = as.matrix(st_geometry(single_tree_info)[[1]])
+  render_tree(long = latlongheight[1], lat = latlongheight[2], 
+              extent = ext(dem), heightmap = dem_mat, 
+              crown_height = single_tree_info$Diameter - 1,
+              crown_width_ratio = 1,
+              trunk_height = 1,
+              custom_obj_crown = get_crown_file(tree = single_tree_info$CrownType,
+                                                solid = TRUE),
+              custom_obj_trunk = get_trunk_file())
+}
+render_camera(40, 23,  0.10, 90)
+render_snapshot()
+render_highquality(min_variance = 1e-6,
+                   samples = 512, 
+                   lightaltitude = 30,
+                   lightdirection = 45)
 
 ```
 
