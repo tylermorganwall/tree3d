@@ -45,6 +45,6 @@ or resolution, and whether or not to offset the crown to align it with the
 trunk at the origin.
 }
 \examples{
-#Load an arrow OBJ
+#Get a crown OBJ
 get_crown_file(tree = "rounded", resolution = "high")
 }
