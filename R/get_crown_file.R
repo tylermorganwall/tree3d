@@ -28,7 +28,7 @@
 #'
 #'@return Filename of OBJ file (as `.txt` file)
 #'@examples
-#'#Load an arrow OBJ
+#'#Get a crown OBJ
 #'get_crown_file(tree = "rounded", resolution = "high")
 get_crown_file = function(tree = "oval",
                           resolution = "medium",
