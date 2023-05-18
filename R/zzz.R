@@ -18,9 +18,12 @@
   }
   trunk_file_path = grep(sys_pkg_files, pattern = 'trunk_clean.txt',
                          invert = FALSE, value = TRUE)
+  trunk_file_path = grep(trunk_file_path, pattern='scaled', invert=TRUE, value=TRUE)
+
   scaled_trunk_path = sprintf("%s%s.txt",
                               tools::file_path_sans_ext(trunk_file_path),
                               "_scaled")
+
   if(!file.exists(scaled_trunk_path)) {
     rayvertex::obj_mesh(trunk_file_path,
                         scale = c(10, 1, 10),
@@ -33,6 +36,8 @@
                              recursive = TRUE, full.names = T)
   trunk_file_path = grep(sys_pkg_files, pattern = 'trunk',
                          invert = FALSE, value = TRUE)
+  trunk_file_path = grep(trunk_file_path, pattern='offset', invert=TRUE, value=TRUE)
+
   offset_trunk_path = sprintf("%s%s.txt",
                               tools::file_path_sans_ext(trunk_file_path),
                               "_offset")
