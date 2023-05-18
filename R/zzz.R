@@ -6,7 +6,7 @@
   offset_paths = sprintf("%s%s.txt", tools::file_path_sans_ext(pkg_files),"_offset")
   for(i in seq_len(length(offset_paths))) {
     if(!file.exists(offset_paths[i]) && file.exists(pkg_files[i])) {
-      tree_data = tree3d:::tree_mesh_data[which(basename(pkg_files[i]) == tree3d:::tree_mesh_data$filename), ]
+      tree_data = tree_mesh_data[which(basename(pkg_files[i]) == tree_mesh_data$filename), ]
       trunk_offset = -tree_data$trunk_start
       rayvertex::obj_mesh(pkg_files[i],
                           position = c(0, trunk_offset, 0),
