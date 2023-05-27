@@ -11,10 +11,13 @@ tree_mesh(
   solid = FALSE,
   resolution = "medium",
   filename = NULL,
-  crown_height = 1,
-  crown_diameter = 1,
-  trunk_height = 0.5,
-  trunk_diameter = 0.1,
+  tree_height = 1,
+  trunk_height_ratio = 1/3,
+  crown_width_ratio = 1,
+  crown_height = NULL,
+  crown_width = NULL,
+  trunk_height = NULL,
+  trunk_width = NULL,
   crown_color = NA,
   trunk_color = "#8C6F5B",
   diffuse_intensity = 1,
@@ -50,13 +53,19 @@ tree_mesh(
 
 \item{filename}{Default \code{NULL}. File name of the OBJ file, if saving the mesh to a local file.}
 
-\item{crown_height}{Default \code{1}. A numeric value setting the height of the crown.}
+\item{tree_height}{Default \code{1}. A numeric value setting the total height of the tree.}
 
-\item{crown_diameter}{Default \code{1}. A numeric value setting the diameter of the crown.}
+\item{trunk_height_ratio}{Default \code{1/3}. A numeric value specifying the ratio of the trunk height to the total height of the tree.}
 
-\item{trunk_height}{Default \code{1}. A numeric value setting the height of the trunk.}
+\item{crown_width_ratio}{Default \code{1}. A numeric value specifying the ratio of the crown width to the crown height.}
 
-\item{trunk_diameter}{Default \code{0.1}. A numeric value setting the diameter of the trunk.}
+\item{crown_height}{Default \code{NULL}. A numeric value setting the height of the crown. If not provided, it is calculated based on the tree height and trunk height ratio.}
+
+\item{crown_width}{Default \code{NULL}. A numeric value setting the diameter of the crown. If not provided, it is calculated based on the crown height and crown width ratio.}
+
+\item{trunk_height}{Default \code{NULL}. A numeric value setting the height of the trunk. If not provided, it is calculated based on the tree height and trunk height ratio.}
+
+\item{trunk_width}{Default \code{NULL}. A numeric value setting the diameter of the trunk. If not provided, this is set to 1/5th the trunk height.}
 
 \item{crown_color}{Default \code{NA}, use default for crown type. A string specifying the hex code of the crown color.}
 
@@ -89,8 +98,9 @@ render_tree_example = function(example_tree_mesh) {
                    light_info = directional_light(c(0.3,1,1), intensity = 0.7),
                    lookfrom=c(0,3,10),
                    fov=10,
-                   shadow_map_dims = 2,
-                   shadow_map_bias = 0.0005,
+                   shadow_map_dims = 2, shadow_map_bias = 0.0005,
+                   width = 800, height = 800,
+                   fsaa = 4, ssao = TRUE, ssao_intensity = 1,
                    background = "lightblue")
 }
 if(tree3d:::run_documentation()) {
@@ -108,12 +118,37 @@ tree_mesh("columnar",
  render_tree_example()
 }
 if(tree3d:::run_documentation()) {
-#Change the trunk and crown dimensions
+#Adjust the trunk/crown proportions of the overall tree using ratios
+tree_mesh("columnar",
+         tree_height = 1,
+         trunk_height_ratio = 1/5,
+         crown_width_ratio = 1.25,
+         trunk_width = 0.125,
+         solid = TRUE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+
+}
+
+if(tree3d:::run_documentation()) {
+#The crown width is set proportional to the crown height (not the overall tree)
+tree_mesh("columnar",
+         tree_height = 1,
+         trunk_height_ratio = 2/3,
+         crown_width_ratio = 1,
+         trunk_width = 0.075,
+         solid = TRUE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+}
+
+if(tree3d:::run_documentation()) {
+#Set the trunk and crown dimensions directly
 tree_mesh("columnar",
          trunk_height = 0.25,
-         trunk_diameter = 0.05,
-         crown_height = 1,
-         crown_diameter = 0.5,
+         trunk_width = 0.05,
+         crown_height = 0.75,
+         crown_width = 0.33,
          solid = TRUE,
          ambient_intensity = 0.3) |>
  render_tree_example()
