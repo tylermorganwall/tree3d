@@ -65,7 +65,7 @@ tree_mesh(
 
 \item{trunk_height}{Default \code{NULL}. A numeric value setting the height of the trunk. If not provided, it is calculated based on the tree height and trunk height ratio.}
 
-\item{trunk_width}{Default \code{NULL}. A numeric value setting the diameter of the trunk. If not provided, this is set to 1/6th the crown width.}
+\item{trunk_width}{Default \code{NULL}. A numeric value setting the diameter of the trunk. If not provided, this is set to 1/10th the crown width.}
 
 \item{crown_color}{Default \code{NA}, use default for crown type. A string specifying the hex code of the crown color.}
 

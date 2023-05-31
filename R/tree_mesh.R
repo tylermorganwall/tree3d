@@ -33,7 +33,7 @@
 #' @param crown_height Default `NULL`. A numeric value setting the height of the crown. If not provided, it is calculated based on the tree height and trunk height ratio.
 #' @param crown_width Default `NULL`. A numeric value setting the diameter of the crown. If not provided, it is calculated based on the crown height and crown width ratio.
 #' @param trunk_height Default `NULL`. A numeric value setting the height of the trunk. If not provided, it is calculated based on the tree height and trunk height ratio.
-#' @param trunk_width Default `NULL`. A numeric value setting the diameter of the trunk. If not provided, this is set to 1/6th the crown width.
+#' @param trunk_width Default `NULL`. A numeric value setting the diameter of the trunk. If not provided, this is set to 1/10th the crown width.
 #' @param crown_color Default `NA`, use default for crown type. A string specifying the hex code of the crown color.
 #' @param trunk_color Default `"#8C6F5B"`. A string specifying the hex code of the trunk color.
 #' @param diffuse_intensity Default `1.0`. A numeric value controlling the amount of diffuse (shaded) color included in the model.
@@ -262,7 +262,7 @@ tree_mesh = function(crown_type = "oval",
     trunk_height = trunk_height_ratio * tree_height
   }
   if(is.null(trunk_width)) {
-    trunk_width = crown_width / 6
+    trunk_width = crown_width / 10
   }
 
   crown_mesh = rayvertex::obj_mesh(crown_file,
