@@ -59,7 +59,7 @@ The tree model can be positioned, scaled, and rotated in 3D space.</p>
 <span>  resolution <span class="op">=</span> <span class="st">"medium"</span>,</span>
 <span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tree_height <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  trunk_height_ratio <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span>,</span>
+<span>  trunk_height_ratio <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  crown_width_ratio <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  crown_height <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  crown_width <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -75,7 +75,19 @@ The tree model can be positioned, scaled, and rotated in 3D space.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>crown_type</dt>
-<dd><p>Default <code>"oval"</code>. Crown type (the leafy part of the tree). Full list of options:</p><table class="table table"><tr><td><strong>3D/Flat</strong></td><td><strong>Name</strong></td><td><strong>Crown Color</strong></td></tr><tr><td>Both</td><td><code>"columnar"</code></td><td><code>"#A2C683"</code> <img src="figures/columnar_square.png" alt=""></td></tr><tr><td>Both</td><td><code>"pyramidal1"</code></td><td><code>"#066038"</code> <img src="figures/pyramidal1_square.png" alt=""></td></tr><tr><td>Both</td><td><code>"pyramidal2"</code></td><td><code>"#447765"</code> <img src="figures/pyramidal2_square.png" alt=""></td></tr><tr><td>Both</td><td><code>"weeping"</code></td><td><code>"#CBD362"</code> <img src="figures/weeping_square.png" alt=""></td></tr><tr><td>Both</td><td><code>"spreading1"</code></td><td><code>"#CCB471"</code> <img src="figures/spreading1_square.png" alt=""></td></tr><tr><td>Both</td><td><code>"oval"</code></td><td><code>"#7CB262"</code> <img src="figures/oval_square.png" alt=""></td></tr><tr><td>Flat-only</td><td><code>"palm"</code></td><td><code>"#DB8952"</code> <img src="figures/palm_square.png" alt=""></td></tr><tr><td>Flat-only</td><td><code>"rounded"</code></td><td><code>"#E0A854"</code> <img src="figures/rounded_square.png" alt=""></td></tr><tr><td>Flat-only</td><td><code>"spreading2"</code></td><td><code>"#75C165"</code> <img src="figures/spreading2_square.png" alt=""></td></tr><tr><td>Flat-only</td><td><code>"vase"</code></td><td><code>"#AECCB1"</code> <img src="figures/vase_square.png" alt=""></td></tr></table></dd>
+<dd><p>Default <code>"oval"</code>. Crown type (the leafy part of the tree). Full list of options:
+| <strong>3D/Flat</strong> | <strong>Name</strong> | <strong>Crown Color</strong> | <strong>Trunk/Crown Ratio</strong> |
+| :----------: | :----------------: | :--------: |
+| Both       | <code>"columnar"</code>   | <code>"#A2C683"</code> <img src="figures/columnar_square.png" alt="">   | 1/3 |
+| Both       | <code>"pyramidal1"</code> | <code>"#066038"</code> <img src="figures/pyramidal1_square.png" alt=""> | 1/6 |
+| Both       | <code>"pyramidal2"</code> | <code>"#447765"</code> <img src="figures/pyramidal2_square.png" alt=""> | 1/6 |
+| Both       | <code>"weeping"</code>    | <code>"#CBD362"</code> <img src="figures/weeping_square.png" alt="">    | 1/3 |
+| Both       | <code>"spreading1"</code> | <code>"#CCB471"</code> <img src="figures/spreading1_square.png" alt=""> | 1/3 |
+| Both       | <code>"oval"</code>       | <code>"#7CB262"</code> <img src="figures/oval_square.png" alt="">       | 1/3 |
+| Flat-only  | <code>"palm"</code>       | <code>"#DB8952"</code> <img src="figures/palm_square.png" alt="">       | 1/2 |
+| Flat-only  | <code>"rounded"</code>    | <code>"#E0A854"</code> <img src="figures/rounded_square.png" alt="">    | 1/3 |
+| Flat-only  | <code>"spreading2"</code> | <code>"#75C165"</code> <img src="figures/spreading2_square.png" alt=""> | 1/3 |
+| Flat-only  | <code>"vase"</code>       | <code>"#AECCB1"</code> <img src="figures/vase_square.png" alt="">       | 1/3 |</p></dd>
 
 
 <dt>position</dt>
@@ -107,7 +119,7 @@ The tree model can be positioned, scaled, and rotated in 3D space.</p>
 
 
 <dt>trunk_height_ratio</dt>
-<dd><p>Default <code>1/3</code>. A numeric value specifying the ratio of the trunk height to the total height of the tree.</p></dd>
+<dd><p>Default <code>NULL</code>. A numeric value specifying the ratio of the trunk height to the total height of the tree. If not provided, default values for each tree type will be used.</p></dd>
 
 
 <dt>crown_width_ratio</dt>
@@ -127,7 +139,7 @@ The tree model can be positioned, scaled, and rotated in 3D space.</p>
 
 
 <dt>trunk_width</dt>
-<dd><p>Default <code>NULL</code>. A numeric value setting the diameter of the trunk. If not provided, this is set to 1/5th the trunk height.</p></dd>
+<dd><p>Default <code>NULL</code>. A numeric value setting the diameter of the trunk. If not provided, this is set to 1/6th the crown width.</p></dd>
 
 
 <dt>crown_color</dt>
@@ -164,13 +176,13 @@ The tree model can be positioned, scaled, and rotated in 3D space.</p>
 <span class="r-in"><span>                          ambient <span class="op">=</span> <span class="st">"grey"</span>, diffuse_intensity <span class="op">=</span> <span class="fl">0.7</span>,</span></span>
 <span class="r-in"><span>                          ambient_intensity <span class="op">=</span> <span class="fl">0.6</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                          scale<span class="op">=</span><span class="fl">25</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>   <span class="fu"><a href="https://www.rayvertex.com/reference/rasterize_scene.html" class="external-link">rasterize_scene</a></span><span class="op">(</span>lookat<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.75</span>,<span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>   <span class="fu"><a href="https://www.rayvertex.com/reference/rasterize_scene.html" class="external-link">rasterize_scene</a></span><span class="op">(</span>lookat<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0.5</span>,<span class="fl">0</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                   light_info <span class="op">=</span> <span class="fu"><a href="https://www.rayvertex.com/reference/directional_light.html" class="external-link">directional_light</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.3</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, intensity <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                   lookfrom<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">3</span>,<span class="fl">10</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                   fov<span class="op">=</span><span class="fl">10</span>,</span></span>
+<span class="r-in"><span>                   fov<span class="op">=</span><span class="fl">8</span>,</span></span>
 <span class="r-in"><span>                   shadow_map_dims <span class="op">=</span> <span class="fl">2</span>, shadow_map_bias <span class="op">=</span> <span class="fl">0.0005</span>,</span></span>
 <span class="r-in"><span>                   width <span class="op">=</span> <span class="fl">800</span>, height <span class="op">=</span> <span class="fl">800</span>,</span></span>
-<span class="r-in"><span>                   fsaa <span class="op">=</span> <span class="fl">4</span>, ssao <span class="op">=</span> <span class="cn">TRUE</span>, ssao_intensity <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>                   <span class="co">#fsaa = 4, ssao = TRUE, ssao_intensity = 1,</span></span></span>
 <span class="r-in"><span>                   background <span class="op">=</span> <span class="st">"lightblue"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span><span class="kw">if</span><span class="op">(</span><span class="fu">tree3d</span><span class="fu">:::</span><span class="fu"><a href="run_documentation.html">run_documentation</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>

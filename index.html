@@ -155,9 +155,8 @@
 <span>  <span class="va">latlongheight</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu">st_geometry</span><span class="op">(</span><span class="va">single_tree_info</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="fu">render_tree</span><span class="op">(</span>long <span class="op">=</span> <span class="va">latlongheight</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, lat <span class="op">=</span> <span class="va">latlongheight</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, </span>
 <span>              extent <span class="op">=</span> <span class="fu">ext</span><span class="op">(</span><span class="va">dem</span><span class="op">)</span>, heightmap <span class="op">=</span> <span class="va">dem_mat</span>, </span>
-<span>              crown_height <span class="op">=</span> <span class="va">single_tree_info</span><span class="op">$</span><span class="va">Diameter</span> <span class="op">-</span> <span class="fl">1</span>,</span>
-<span>              crown_width_ratio <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>              trunk_height <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>              tree_height <span class="op">=</span> <span class="va">single_tree_info</span><span class="op">$</span><span class="va">Height</span>,</span>
+<span>              crown_width <span class="op">=</span> <span class="va">single_tree_info</span><span class="op">$</span><span class="va">Diameter</span>,</span>
 <span>              custom_obj_crown <span class="op">=</span> <span class="fu"><a href="reference/get_crown_file.html">get_crown_file</a></span><span class="op">(</span>tree <span class="op">=</span> <span class="va">single_tree_info</span><span class="op">$</span><span class="va">CrownType</span><span class="op">)</span>,</span>
 <span>              custom_obj_trunk <span class="op">=</span> <span class="fu"><a href="reference/get_trunk_file.html">get_trunk_file</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
@@ -172,9 +171,8 @@
 <span>  <span class="va">latlongheight</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="fu">st_geometry</span><span class="op">(</span><span class="va">single_tree_info</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span>  <span class="fu">render_tree</span><span class="op">(</span>long <span class="op">=</span> <span class="va">latlongheight</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, lat <span class="op">=</span> <span class="va">latlongheight</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, </span>
 <span>              extent <span class="op">=</span> <span class="fu">ext</span><span class="op">(</span><span class="va">dem</span><span class="op">)</span>, heightmap <span class="op">=</span> <span class="va">dem_mat</span>, </span>
-<span>              crown_height <span class="op">=</span> <span class="va">single_tree_info</span><span class="op">$</span><span class="va">Diameter</span> <span class="op">-</span> <span class="fl">1</span>,</span>
-<span>              crown_width_ratio <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>              trunk_height <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>              tree_height <span class="op">=</span> <span class="va">single_tree_info</span><span class="op">$</span><span class="va">Height</span>,</span>
+<span>              crown_width <span class="op">=</span> <span class="va">single_tree_info</span><span class="op">$</span><span class="va">Diameter</span>,</span>
 <span>              custom_obj_crown <span class="op">=</span> <span class="fu"><a href="reference/get_crown_file.html">get_crown_file</a></span><span class="op">(</span>tree <span class="op">=</span> <span class="va">single_tree_info</span><span class="op">$</span><span class="va">CrownType</span>,</span>
 <span>                                                solid <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>              custom_obj_trunk <span class="op">=</span> <span class="fu"><a href="reference/get_trunk_file.html">get_trunk_file</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
@@ -188,6 +186,86 @@
 <span>                   lightaltitude <span class="op">=</span> <span class="fl">30</span>,</span>
 <span>                   lightdirection <span class="op">=</span> <span class="fl">45</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-hq-2.png" width="100%"></p>
+<p>We can also extract 3D tree information from lidar data using the lidR package and use that data to generate 3D trees. Here, we’ll use random trees from the package to fill in our scene.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-lidar/lidR" class="external-link">lidR</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rspatial.org/" class="external-link">terra</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#We will use the lidR package to generate a DEM and detect the crown tops of trees, and</span></span>
+<span><span class="co">#then use rayshader to render 3D tree models scaled to those heights on the map.</span></span>
+<span><span class="co">#Load the example data from the lidR package</span></span>
+<span><span class="va">LASfile</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"Topography.laz"</span>, package<span class="op">=</span><span class="st">"lidR"</span><span class="op">)</span></span>
+<span><span class="va">las</span> <span class="op">=</span> <span class="fu">lidR</span><span class="fu">::</span><span class="fu">readLAS</span><span class="op">(</span><span class="va">LASfile</span>, filter <span class="op">=</span> <span class="st">"-inside 273450 5274350 273550 5274450"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Convert the lidar point data to a DEM and detect the location of trees from the same data</span></span>
+<span><span class="va">dem</span> <span class="op">=</span> <span class="fu">lidR</span><span class="fu">::</span><span class="fu">rasterize_terrain</span><span class="op">(</span><span class="va">las</span>, algorithm <span class="op">=</span> <span class="fu">lidR</span><span class="fu">::</span><span class="fu">tin</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">tree_top_data</span> <span class="op">=</span> <span class="fu">lidR</span><span class="fu">::</span><span class="fu">locate_trees</span><span class="op">(</span><span class="va">las</span>, <span class="fu">lidR</span><span class="fu">::</span><span class="fu">lmf</span><span class="op">(</span>ws <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">tree_locations</span> <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu">st_coordinates</span><span class="op">(</span><span class="va">tree_top_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#Convert DEM to a matrix and extract the extent of the scene</span></span>
+<span><span class="va">dem_matrix</span> <span class="op">=</span> <span class="fu">raster_to_matrix</span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span>
+<span><span class="va">dem_extent</span> <span class="op">=</span> <span class="fu">terra</span><span class="fu">::</span><span class="fu">ext</span><span class="op">(</span><span class="va">dem</span><span class="op">)</span></span>
+<span><span class="va">extent_values</span> <span class="op">=</span> <span class="va">dem_extent</span><span class="op">@</span><span class="va">ptr</span><span class="op">$</span><span class="va">vector</span></span>
+<span></span>
+<span><span class="co">#Plot the ground</span></span>
+<span><span class="va">dem_matrix</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">height_shade</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">add_shadow</span><span class="op">(</span><span class="fu">texture_shade</span><span class="op">(</span><span class="va">dem_matrix</span><span class="op">)</span>,<span class="fl">0.2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">add_shadow</span><span class="op">(</span><span class="fu">lamb_shade</span><span class="op">(</span><span class="va">dem_matrix</span><span class="op">)</span>,<span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">plot_3d</span><span class="op">(</span><span class="va">dem_matrix</span>, windowsize <span class="op">=</span> <span class="fl">800</span>, zscale <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu">render_snapshot</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-lidar-1.png" width="100%"></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co">#Get tree data</span></span>
+<span><span class="va">tree_df</span> <span class="op">=</span> <span class="fu">tree3d</span><span class="fu">::</span><span class="fu"><a href="reference/get_tree_data.html">get_tree_data</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">tree_df</span></span>
+<span><span class="co">#&gt;          name solid_available trunk_color tree_color trunk_crown_ratio</span></span>
+<span><span class="co">#&gt; 1    columnar            TRUE     #8C6F5B    #A2C683         0.3333333</span></span>
+<span><span class="co">#&gt; 2  pyramidal1            TRUE     #8C6F5B    #066038         0.1666667</span></span>
+<span><span class="co">#&gt; 3  pyramidal2            TRUE     #8C6F5B    #447765         0.1666667</span></span>
+<span><span class="co">#&gt; 4        oval            TRUE     #8C6F5B    #CBD362         0.3333333</span></span>
+<span><span class="co">#&gt; 5        palm           FALSE     #8C6F5B    #CCB471         0.5000000</span></span>
+<span><span class="co">#&gt; 6     rounded           FALSE     #8C6F5B    #7CB262         0.3333333</span></span>
+<span><span class="co">#&gt; 7  spreading1            TRUE     #8C6F5B    #DB8952         0.3333333</span></span>
+<span><span class="co">#&gt; 8  spreading2           FALSE     #8C6F5B    #E0A854         0.3333333</span></span>
+<span><span class="co">#&gt; 9        vase           FALSE     #8C6F5B    #75C165         0.3333333</span></span>
+<span><span class="co">#&gt; 10    weeping            TRUE     #8C6F5B    #AECCB1         0.3333333</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">random_trees</span> <span class="op">=</span> <span class="va">tree_df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">tree_locations</span><span class="op">)</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>,<span class="op">]</span></span>
+<span><span class="va">random_trees</span><span class="op">$</span><span class="va">solid_available</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">random_trees</span><span class="op">$</span><span class="va">solid_available</span>, </span>
+<span>                                      <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>,<span class="cn">FALSE</span><span class="op">)</span>,<span class="fl">1</span><span class="op">)</span>,</span>
+<span>                                      <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">random_trees</span><span class="op">)</span></span>
+<span><span class="co">#&gt;           name solid_available trunk_color tree_color trunk_crown_ratio</span></span>
+<span><span class="co">#&gt; 9         vase           FALSE     #8C6F5B    #75C165         0.3333333</span></span>
+<span><span class="co">#&gt; 4         oval            TRUE     #8C6F5B    #CBD362         0.3333333</span></span>
+<span><span class="co">#&gt; 7   spreading1            TRUE     #8C6F5B    #DB8952         0.3333333</span></span>
+<span><span class="co">#&gt; 1     columnar            TRUE     #8C6F5B    #A2C683         0.3333333</span></span>
+<span><span class="co">#&gt; 2   pyramidal1            TRUE     #8C6F5B    #066038         0.1666667</span></span>
+<span><span class="co">#&gt; 7.1 spreading1            TRUE     #8C6F5B    #DB8952         0.3333333</span></span>
+<span></span>
+<span><span class="fu">render_camera</span><span class="op">(</span>theta<span class="op">=</span><span class="fl">45</span>,phi<span class="op">=</span><span class="fl">30</span>,zoom<span class="op">=</span><span class="fl">0.3</span>,fov<span class="op">=</span><span class="fl">90</span>, shift_vertical <span class="op">=</span> <span class="op">-</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">tree_locations</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">trunk_ratio_single</span> <span class="op">=</span> <span class="va">tree_df</span><span class="op">$</span><span class="va">trunk_crown_ratio</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">tree_df</span><span class="op">$</span><span class="va">name</span> <span class="op">==</span> <span class="va">random_trees</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">]</span></span>
+<span>  <span class="fu">render_tree</span><span class="op">(</span>lat <span class="op">=</span> <span class="va">tree_locations</span><span class="op">[</span><span class="va">i</span>,<span class="fl">2</span><span class="op">]</span>, long <span class="op">=</span> <span class="va">tree_locations</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span>,</span>
+<span>              custom_obj_crown <span class="op">=</span> <span class="fu"><a href="reference/get_crown_file.html">get_crown_file</a></span><span class="op">(</span><span class="va">random_trees</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span>, resolution <span class="op">=</span> <span class="st">"high"</span>,</span>
+<span>                                                solid <span class="op">=</span> <span class="va">random_trees</span><span class="op">[</span><span class="va">i</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>              custom_obj_trunk <span class="op">=</span> <span class="fu"><a href="reference/get_trunk_file.html">get_trunk_file</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>              absolute_height <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>              tree_height <span class="op">=</span> <span class="va">tree_locations</span><span class="op">[</span><span class="va">i</span>,<span class="fl">3</span><span class="op">]</span>,</span>
+<span>              trunk_height_ratio <span class="op">=</span> <span class="va">trunk_ratio_single</span>,</span>
+<span>              crown_width_ratio <span class="op">=</span> <span class="fl">0.75</span> <span class="op">+</span> <span class="fl">0.25</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span>
+<span>              crown_color <span class="op">=</span> <span class="va">random_trees</span><span class="op">[</span><span class="va">i</span>,<span class="fl">4</span><span class="op">]</span>,</span>
+<span>              angle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">360</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,<span class="fl">0</span><span class="op">)</span>,</span>
+<span>              extent <span class="op">=</span> <span class="va">dem</span>, </span>
+<span>              zscale <span class="op">=</span> <span class="fl">2</span>, </span>
+<span>              heightmap <span class="op">=</span> <span class="va">dem_matrix</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">render_snapshot</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-lidar-2.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
