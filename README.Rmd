@@ -1,5 +1,7 @@
 ---
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -12,6 +14,7 @@ knitr::opts_chunk$set(
   out.width = "100%",
   fig.width=8,
   fig.height=8,
+  cache = TRUE, 
   dpi=100)
 ```
 
@@ -106,9 +109,8 @@ for(i in seq_len(nrow(baseline_tree))) {
   latlongheight = as.matrix(st_geometry(single_tree_info)[[1]])
   render_tree(long = latlongheight[1], lat = latlongheight[2], 
               extent = ext(dem), heightmap = dem_mat, 
-              crown_height = single_tree_info$Diameter - 1,
-              crown_width_ratio = 1,
-              trunk_height = 1,
+              tree_height = single_tree_info$Height,
+              crown_width = single_tree_info$Diameter,
               custom_obj_crown = get_crown_file(tree = single_tree_info$CrownType),
               custom_obj_trunk = get_trunk_file())
 }
@@ -125,9 +127,8 @@ for(i in seq_len(nrow(baseline_tree))) {
   latlongheight = as.matrix(st_geometry(single_tree_info)[[1]])
   render_tree(long = latlongheight[1], lat = latlongheight[2], 
               extent = ext(dem), heightmap = dem_mat, 
-              crown_height = single_tree_info$Diameter - 1,
-              crown_width_ratio = 1,
-              trunk_height = 1,
+              tree_height = single_tree_info$Height,
+              crown_width = single_tree_info$Diameter,
               custom_obj_crown = get_crown_file(tree = single_tree_info$CrownType,
                                                 solid = TRUE),
               custom_obj_trunk = get_trunk_file())
@@ -140,6 +141,69 @@ render_highquality(min_variance = 1e-6,
                    lightdirection = 45)
 
 ```
+
+We can also extract 3D tree information from lidar data using the lidR package and use that data to generate 3D trees. Here, we'll use random trees from the package to fill in our scene.
+
+```{r lidar}
+library(lidR)
+library(sf)
+library(terra)
+
+#We will use the lidR package to generate a DEM and detect the crown tops of trees, and
+#then use rayshader to render 3D tree models scaled to those heights on the map.
+#Load the example data from the lidR package
+LASfile = system.file("extdata", "Topography.laz", package="lidR")
+las = lidR::readLAS(LASfile, filter = "-inside 273450 5274350 273550 5274450")
+
+#Convert the lidar point data to a DEM and detect the location of trees from the same data
+dem = lidR::rasterize_terrain(las, algorithm = lidR::tin())
+tree_top_data = lidR::locate_trees(las, lidR::lmf(ws = 5))
+tree_locations = sf::st_coordinates(tree_top_data)
+
+#Convert DEM to a matrix and extract the extent of the scene
+dem_matrix = raster_to_matrix(dem)
+dem_extent = terra::ext(dem)
+extent_values = dem_extent@ptr$vector
+
+#Plot the ground
+dem_matrix |>
+  height_shade() |>
+  add_shadow(texture_shade(dem_matrix),0.2) |>
+  add_shadow(lamb_shade(dem_matrix),0) |>
+  plot_3d(dem_matrix, windowsize = 800, zscale = 2)
+render_snapshot()
+
+#Get tree data
+tree_df = tree3d::get_tree_data()
+tree_df
+
+set.seed(1)
+random_trees = tree_df[sample(1:10, nrow(tree_locations), replace=TRUE),]
+random_trees$solid_available = ifelse(random_trees$solid_available, 
+                                      sample(c(TRUE,FALSE),1),
+                                      FALSE)
+head(random_trees)
+
+render_camera(theta=45,phi=30,zoom=0.3,fov=90, shift_vertical = -10)
+for(i in seq_len(nrow(tree_locations))) {
+  trunk_ratio_single = tree_df$trunk_crown_ratio[which(tree_df$name == random_trees[i,1])]
+  render_tree(lat = tree_locations[i,2], long = tree_locations[i,1],
+              custom_obj_crown = get_crown_file(random_trees[i,1], resolution = "high",
+                                                solid = random_trees[i,2]),
+              custom_obj_trunk = get_trunk_file(),
+              absolute_height = TRUE, 
+              tree_height = tree_locations[i,3],
+              trunk_height_ratio = trunk_ratio_single,
+              crown_width_ratio = 0.75 + 0.25 * runif(1),
+              crown_color = random_trees[i,4],
+              angle = c(0,360*runif(1),0),
+              extent = dem, 
+              zscale = 2, 
+              heightmap = dem_matrix)
+}
+render_snapshot()
+```
+
 
 ## Acknowledgements
 

@@ -6,18 +6,18 @@
 #' The tree model can be positioned, scaled, and rotated in 3D space.
 #'
 #' @param crown_type Default `"oval"`. Crown type (the leafy part of the tree). Full list of options:
-#'| **3D/Flat** | **Name** | **Crown Color** |
+#'| **3D/Flat** | **Name** | **Crown Color** | **Trunk/Crown Ratio** |
 #'| :----------: | :----------------: | :--------: |
-#'| Both       | `"columnar"`   | `"#A2C683"` \figure{columnar_square.png}   |
-#'| Both       | `"pyramidal1"` | `"#066038"` \figure{pyramidal1_square.png} |
-#'| Both       | `"pyramidal2"` | `"#447765"` \figure{pyramidal2_square.png} |
-#'| Both       | `"weeping"`    | `"#CBD362"` \figure{weeping_square.png}    |
-#'| Both       | `"spreading1"` | `"#CCB471"` \figure{spreading1_square.png} |
-#'| Both       | `"oval"`       | `"#7CB262"` \figure{oval_square.png}       |
-#'| Flat-only  | `"palm"`       | `"#DB8952"` \figure{palm_square.png}       |
-#'| Flat-only  | `"rounded"`    | `"#E0A854"` \figure{rounded_square.png}    |
-#'| Flat-only  | `"spreading2"` | `"#75C165"` \figure{spreading2_square.png} |
-#'| Flat-only  | `"vase"`       | `"#AECCB1"` \figure{vase_square.png}       |
+#'| Both       | `"columnar"`   | `"#A2C683"` \figure{columnar_square.png}   | 1/3 |
+#'| Both       | `"pyramidal1"` | `"#066038"` \figure{pyramidal1_square.png} | 1/6 |
+#'| Both       | `"pyramidal2"` | `"#447765"` \figure{pyramidal2_square.png} | 1/6 |
+#'| Both       | `"weeping"`    | `"#CBD362"` \figure{weeping_square.png}    | 1/3 |
+#'| Both       | `"spreading1"` | `"#CCB471"` \figure{spreading1_square.png} | 1/3 |
+#'| Both       | `"oval"`       | `"#7CB262"` \figure{oval_square.png}       | 1/3 |
+#'| Flat-only  | `"palm"`       | `"#DB8952"` \figure{palm_square.png}       | 1/2 |
+#'| Flat-only  | `"rounded"`    | `"#E0A854"` \figure{rounded_square.png}    | 1/3 |
+#'| Flat-only  | `"spreading2"` | `"#75C165"` \figure{spreading2_square.png} | 1/3 |
+#'| Flat-only  | `"vase"`       | `"#AECCB1"` \figure{vase_square.png}       | 1/3 |
 #' @param solid Default `FALSE`. Whether the crown should be a solid mesh (`TRUE`), or a collection of flat
 #' 2D planes (`FALSE`).
 #' @param position Default `c(0,0,0)`. A length-3 numeric vector specifying the X, Y, and Z coordinates of the tree mesh in 3D space.
@@ -28,12 +28,12 @@
 #'`"high`
 #' @param filename Default `NULL`. File name of the OBJ file, if saving the mesh to a local file.
 #' @param tree_height Default `1`. A numeric value setting the total height of the tree.
-#' @param trunk_height_ratio Default `1/3`. A numeric value specifying the ratio of the trunk height to the total height of the tree.
+#' @param trunk_height_ratio Default `NULL`. A numeric value specifying the ratio of the trunk height to the total height of the tree. If not provided, default values for each tree type will be used.
 #' @param crown_width_ratio Default `1`. A numeric value specifying the ratio of the crown width to the crown height.
 #' @param crown_height Default `NULL`. A numeric value setting the height of the crown. If not provided, it is calculated based on the tree height and trunk height ratio.
 #' @param crown_width Default `NULL`. A numeric value setting the diameter of the crown. If not provided, it is calculated based on the crown height and crown width ratio.
 #' @param trunk_height Default `NULL`. A numeric value setting the height of the trunk. If not provided, it is calculated based on the tree height and trunk height ratio.
-#' @param trunk_width Default `NULL`. A numeric value setting the diameter of the trunk. If not provided, this is set to 1/5th the trunk height.
+#' @param trunk_width Default `NULL`. A numeric value setting the diameter of the trunk. If not provided, this is set to 1/6th the crown width.
 #' @param crown_color Default `NA`, use default for crown type. A string specifying the hex code of the crown color.
 #' @param trunk_color Default `"#8C6F5B"`. A string specifying the hex code of the trunk color.
 #' @param diffuse_intensity Default `1.0`. A numeric value controlling the amount of diffuse (shaded) color included in the model.
@@ -51,13 +51,13 @@
 #'                           ambient = "grey", diffuse_intensity = 0.7,
 #'                           ambient_intensity = 0.6),
 #'                           scale=25)) |>
-#'    rasterize_scene(lookat=c(0,0.75,0),
+#'    rasterize_scene(lookat=c(0,0.5,0),
 #'                    light_info = directional_light(c(0.3,1,1), intensity = 0.7),
 #'                    lookfrom=c(0,3,10),
-#'                    fov=10,
+#'                    fov=8,
 #'                    shadow_map_dims = 2, shadow_map_bias = 0.0005,
 #'                    width = 800, height = 800,
-#'                    fsaa = 4, ssao = TRUE, ssao_intensity = 1,
+#'                    #fsaa = 4, ssao = TRUE, ssao_intensity = 1,
 #'                    background = "lightblue")
 #'}
 #'if(tree3d:::run_documentation()) {
@@ -223,7 +223,7 @@ tree_mesh = function(crown_type = "oval",
                      resolution = "medium",
                      filename = NULL,
                      tree_height  = 1,
-                     trunk_height_ratio = 1/3,
+                     trunk_height_ratio = NULL,
                      crown_width_ratio = 1,
                      crown_height = NULL,
                      crown_width = NULL,
@@ -242,6 +242,11 @@ tree_mesh = function(crown_type = "oval",
   if(is.na(crown_color)) {
     crown_color = get_default_tree_color(crown_type)
   }
+  tree_data = get_tree_data()
+  if(is.null(trunk_height_ratio)) {
+    default_ratio = tree_data$trunk_crown_ratio[which(tree_data$name == crown_type)]
+    trunk_height_ratio = default_ratio
+  }
 
   #Define crown dimensions
   if(is.null(crown_height)) {
@@ -257,7 +262,7 @@ tree_mesh = function(crown_type = "oval",
     trunk_height = trunk_height_ratio * tree_height
   }
   if(is.null(trunk_width)) {
-    trunk_width = trunk_height / 5
+    trunk_width = crown_width / 6
   }
 
   crown_mesh = rayvertex::obj_mesh(crown_file,

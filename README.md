@@ -134,9 +134,8 @@ for(i in seq_len(nrow(baseline_tree))) {
   latlongheight = as.matrix(st_geometry(single_tree_info)[[1]])
   render_tree(long = latlongheight[1], lat = latlongheight[2], 
               extent = ext(dem), heightmap = dem_mat, 
-              crown_height = single_tree_info$Diameter - 1,
-              crown_width_ratio = 1,
-              trunk_height = 1,
+              tree_height = single_tree_info$Height,
+              crown_width = single_tree_info$Diameter,
               custom_obj_crown = get_crown_file(tree = single_tree_info$CrownType),
               custom_obj_trunk = get_trunk_file())
 }
@@ -156,9 +155,8 @@ for(i in seq_len(nrow(baseline_tree))) {
   latlongheight = as.matrix(st_geometry(single_tree_info)[[1]])
   render_tree(long = latlongheight[1], lat = latlongheight[2], 
               extent = ext(dem), heightmap = dem_mat, 
-              crown_height = single_tree_info$Diameter - 1,
-              crown_width_ratio = 1,
-              trunk_height = 1,
+              tree_height = single_tree_info$Height,
+              crown_width = single_tree_info$Diameter,
               custom_obj_crown = get_crown_file(tree = single_tree_info$CrownType,
                                                 solid = TRUE),
               custom_obj_trunk = get_trunk_file())
@@ -177,5 +175,94 @@ render_highquality(min_variance = 1e-6,
 ```
 
 <img src="man/figures/README-hq-2.png" width="100%" />
+
+We can also extract 3D tree information from lidar data using the lidR
+package and use that data to generate 3D trees. Here, we’ll use random
+trees from the package to fill in our scene.
+
+``` r
+library(lidR)
+library(sf)
+library(terra)
+
+#We will use the lidR package to generate a DEM and detect the crown tops of trees, and
+#then use rayshader to render 3D tree models scaled to those heights on the map.
+#Load the example data from the lidR package
+LASfile = system.file("extdata", "Topography.laz", package="lidR")
+las = lidR::readLAS(LASfile, filter = "-inside 273450 5274350 273550 5274450")
+
+#Convert the lidar point data to a DEM and detect the location of trees from the same data
+dem = lidR::rasterize_terrain(las, algorithm = lidR::tin())
+tree_top_data = lidR::locate_trees(las, lidR::lmf(ws = 5))
+tree_locations = sf::st_coordinates(tree_top_data)
+
+#Convert DEM to a matrix and extract the extent of the scene
+dem_matrix = raster_to_matrix(dem)
+dem_extent = terra::ext(dem)
+extent_values = dem_extent@ptr$vector
+
+#Plot the ground
+dem_matrix |>
+  height_shade() |>
+  add_shadow(texture_shade(dem_matrix),0.2) |>
+  add_shadow(lamb_shade(dem_matrix),0) |>
+  plot_3d(dem_matrix, windowsize = 800, zscale = 2)
+render_snapshot()
+```
+
+<img src="man/figures/README-lidar-1.png" width="100%" />
+
+``` r
+
+#Get tree data
+tree_df = tree3d::get_tree_data()
+tree_df
+#>          name solid_available trunk_color tree_color trunk_crown_ratio
+#> 1    columnar            TRUE     #8C6F5B    #A2C683         0.3333333
+#> 2  pyramidal1            TRUE     #8C6F5B    #066038         0.1666667
+#> 3  pyramidal2            TRUE     #8C6F5B    #447765         0.1666667
+#> 4        oval            TRUE     #8C6F5B    #CBD362         0.3333333
+#> 5        palm           FALSE     #8C6F5B    #CCB471         0.5000000
+#> 6     rounded           FALSE     #8C6F5B    #7CB262         0.3333333
+#> 7  spreading1            TRUE     #8C6F5B    #DB8952         0.3333333
+#> 8  spreading2           FALSE     #8C6F5B    #E0A854         0.3333333
+#> 9        vase           FALSE     #8C6F5B    #75C165         0.3333333
+#> 10    weeping            TRUE     #8C6F5B    #AECCB1         0.3333333
+
+set.seed(1)
+random_trees = tree_df[sample(1:10, nrow(tree_locations), replace=TRUE),]
+random_trees$solid_available = ifelse(random_trees$solid_available, 
+                                      sample(c(TRUE,FALSE),1),
+                                      FALSE)
+head(random_trees)
+#>           name solid_available trunk_color tree_color trunk_crown_ratio
+#> 9         vase           FALSE     #8C6F5B    #75C165         0.3333333
+#> 4         oval            TRUE     #8C6F5B    #CBD362         0.3333333
+#> 7   spreading1            TRUE     #8C6F5B    #DB8952         0.3333333
+#> 1     columnar            TRUE     #8C6F5B    #A2C683         0.3333333
+#> 2   pyramidal1            TRUE     #8C6F5B    #066038         0.1666667
+#> 7.1 spreading1            TRUE     #8C6F5B    #DB8952         0.3333333
+
+render_camera(theta=45,phi=30,zoom=0.3,fov=90, shift_vertical = -10)
+for(i in seq_len(nrow(tree_locations))) {
+  trunk_ratio_single = tree_df$trunk_crown_ratio[which(tree_df$name == random_trees[i,1])]
+  render_tree(lat = tree_locations[i,2], long = tree_locations[i,1],
+              custom_obj_crown = get_crown_file(random_trees[i,1], resolution = "high",
+                                                solid = random_trees[i,2]),
+              custom_obj_trunk = get_trunk_file(),
+              absolute_height = TRUE, 
+              tree_height = tree_locations[i,3],
+              trunk_height_ratio = trunk_ratio_single,
+              crown_width_ratio = 0.75 + 0.25 * runif(1),
+              crown_color = random_trees[i,4],
+              angle = c(0,360*runif(1),0),
+              extent = dem, 
+              zscale = 2, 
+              heightmap = dem_matrix)
+}
+render_snapshot()
+```
+
+<img src="man/figures/README-lidar-2.png" width="100%" />
 
 ## Acknowledgements

@@ -33,7 +33,17 @@ get_tree_data = function() {
                    "#DB8952",
                    "#E0A854",
                    "#75C165",
-                   "#AECCB1")
+                   "#AECCB1"),
+    trunk_crown_ratio = c(1/3,
+                          1/6,
+                          1/6,
+                          1/3,
+                          1/2,
+                          1/3,
+                          1/3,
+                          1/3,
+                          1/3,
+                          1/3)
   )
   return(tree_color_data)
 }
