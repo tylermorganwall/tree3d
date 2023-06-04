@@ -11,10 +11,13 @@ tree_mesh(
   solid = FALSE,
   resolution = "medium",
   filename = NULL,
-  crown_height = 1,
-  crown_diameter = 1,
-  trunk_height = 0.5,
-  trunk_diameter = 0.1,
+  tree_height = 1,
+  trunk_height_ratio = NULL,
+  crown_width_ratio = 1,
+  crown_height = NULL,
+  crown_width = NULL,
+  trunk_height = NULL,
+  trunk_width = NULL,
   crown_color = NA,
   trunk_color = "#8C6F5B",
   diffuse_intensity = 1,
@@ -22,19 +25,19 @@ tree_mesh(
 )
 }
 \arguments{
-\item{crown_type}{Default \code{"oval"}. Crown type (the leafy part of the tree). Full list of options:\tabular{ccc}{
-   \strong{3D/Flat} \tab \strong{Name} \tab \strong{Crown Color} \cr
-   Both \tab \code{"columnar"} \tab \code{"#A2C683"} \figure{columnar_square.png} \cr
-   Both \tab \code{"pyramidal1"} \tab \code{"#066038"} \figure{pyramidal1_square.png} \cr
-   Both \tab \code{"pyramidal2"} \tab \code{"#447765"} \figure{pyramidal2_square.png} \cr
-   Both \tab \code{"weeping"} \tab \code{"#CBD362"} \figure{weeping_square.png} \cr
-   Both \tab \code{"spreading1"} \tab \code{"#CCB471"} \figure{spreading1_square.png} \cr
-   Both \tab \code{"oval"} \tab \code{"#7CB262"} \figure{oval_square.png} \cr
-   Flat-only \tab \code{"palm"} \tab \code{"#DB8952"} \figure{palm_square.png} \cr
-   Flat-only \tab \code{"rounded"} \tab \code{"#E0A854"} \figure{rounded_square.png} \cr
-   Flat-only \tab \code{"spreading2"} \tab \code{"#75C165"} \figure{spreading2_square.png} \cr
-   Flat-only \tab \code{"vase"} \tab \code{"#AECCB1"} \figure{vase_square.png} \cr
-}}
+\item{crown_type}{Default \code{"oval"}. Crown type (the leafy part of the tree). Full list of options:
+| \strong{3D/Flat} | \strong{Name} | \strong{Crown Color} | \strong{Trunk/Crown Ratio} |
+| :----------: | :----------------: | :--------: |
+| Both       | \code{"columnar"}   | \code{"#A2C683"} \figure{columnar_square.png}   | 1/3 |
+| Both       | \code{"pyramidal1"} | \code{"#066038"} \figure{pyramidal1_square.png} | 1/6 |
+| Both       | \code{"pyramidal2"} | \code{"#447765"} \figure{pyramidal2_square.png} | 1/6 |
+| Both       | \code{"weeping"}    | \code{"#CBD362"} \figure{weeping_square.png}    | 1/3 |
+| Both       | \code{"spreading1"} | \code{"#CCB471"} \figure{spreading1_square.png} | 1/3 |
+| Both       | \code{"oval"}       | \code{"#7CB262"} \figure{oval_square.png}       | 1/3 |
+| Flat-only  | \code{"palm"}       | \code{"#DB8952"} \figure{palm_square.png}       | 1/2 |
+| Flat-only  | \code{"rounded"}    | \code{"#E0A854"} \figure{rounded_square.png}    | 1/3 |
+| Flat-only  | \code{"spreading2"} | \code{"#75C165"} \figure{spreading2_square.png} | 1/3 |
+| Flat-only  | \code{"vase"}       | \code{"#AECCB1"} \figure{vase_square.png}       | 1/3 |}
 
 \item{position}{Default \code{c(0,0,0)}. A length-3 numeric vector specifying the X, Y, and Z coordinates of the tree mesh in 3D space.}
 
@@ -48,15 +51,21 @@ tree_mesh(
 \code{"medium"}
 \verb{"high}}
 
-\item{filename}{Default \code{NULL}. Filename of the OBJ file, if saving the mesh to a local file.}
+\item{filename}{Default \code{NULL}. File name of the OBJ file, if saving the mesh to a local file.}
 
-\item{crown_height}{Default \code{1}. A numeric value setting the height of the crown.}
+\item{tree_height}{Default \code{1}. A numeric value setting the total height of the tree.}
 
-\item{crown_diameter}{Default \code{1}. A numeric value setting the diameter of the crown.}
+\item{trunk_height_ratio}{Default \code{NULL}. A numeric value specifying the ratio of the trunk height to the total height of the tree. If not provided, default values for each tree type will be used.}
 
-\item{trunk_height}{Default \code{1}. A numeric value setting the height of the trunk.}
+\item{crown_width_ratio}{Default \code{1}. A numeric value specifying the ratio of the crown width to the crown height.}
 
-\item{trunk_diameter}{Default \code{0.1}. A numeric value setting the diameter of the trunk.}
+\item{crown_height}{Default \code{NULL}. A numeric value setting the height of the crown. If not provided, it is calculated based on the tree height and trunk height ratio.}
+
+\item{crown_width}{Default \code{NULL}. A numeric value setting the diameter of the crown. If not provided, it is calculated based on the crown height and crown width ratio.}
+
+\item{trunk_height}{Default \code{NULL}. A numeric value setting the height of the trunk. If not provided, it is calculated based on the tree height and trunk height ratio.}
+
+\item{trunk_width}{Default \code{NULL}. A numeric value setting the diameter of the trunk. If not provided, this is set to 1/10th the crown width.}
 
 \item{crown_color}{Default \code{NA}, use default for crown type. A string specifying the hex code of the crown color.}
 
@@ -85,35 +94,66 @@ render_tree_example = function(example_tree_mesh) {
                           ambient = "grey", diffuse_intensity = 0.7,
                           ambient_intensity = 0.6),
                           scale=25)) |>
-   rasterize_scene(lookat=c(0,0.75,0),
+   rasterize_scene(lookat=c(0,0.5,0),
                    light_info = directional_light(c(0.3,1,1), intensity = 0.7),
                    lookfrom=c(0,3,10),
-                   fov=10,
-                   shadow_map_dims = 2,
-                   shadow_map_bias = 0.0005,
+                   fov=8,
+                   shadow_map_dims = 2, shadow_map_bias = 0.0005,
+                   width = 800, height = 800,
+                   #fsaa = 4, ssao = TRUE, ssao_intensity = 1,
                    background = "lightblue")
 }
+if(tree3d:::run_documentation()) {
 #Render a basic 3D crown
 tree_mesh("columnar",
          solid = TRUE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 #Render the 2D planar version
 tree_mesh("columnar",
          solid = FALSE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
-#Change the trunk and crown dimensions
+}
+if(tree3d:::run_documentation()) {
+#Adjust the trunk/crown proportions of the overall tree using ratios
 tree_mesh("columnar",
-         trunk_height = 0.5,
-         crown_height = 1,
-         crown_diameter = 0.5,
+         tree_height = 1,
+         trunk_height_ratio = 1/5,
+         crown_width_ratio = 1.25,
+         trunk_width = 0.125,
          solid = TRUE,
          ambient_intensity = 0.3) |>
  render_tree_example()
 
+}
+
+if(tree3d:::run_documentation()) {
+#The crown width is set proportional to the crown height (not the overall tree)
+tree_mesh("columnar",
+         tree_height = 1,
+         trunk_height_ratio = 2/3,
+         crown_width_ratio = 1,
+         trunk_width = 0.075,
+         solid = TRUE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+}
+
+if(tree3d:::run_documentation()) {
+#Set the trunk and crown dimensions directly
+tree_mesh("columnar",
+         trunk_height = 0.25,
+         trunk_width = 0.05,
+         crown_height = 0.75,
+         crown_width = 0.33,
+         solid = TRUE,
+         ambient_intensity = 0.3) |>
+ render_tree_example()
+}
+if(tree3d:::run_documentation()) {
 #Change the crown and trunk color
 tree_mesh("columnar",
          solid = TRUE,
@@ -121,85 +161,102 @@ tree_mesh("columnar",
          trunk_color = "tan",
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 #Render different tree types, both 2D and 3D versions
 tree_mesh("columnar",
          solid = TRUE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("columnar",
          solid = FALSE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("pyramidal1",
          solid = TRUE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("pyramidal1",
          solid = FALSE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("pyramidal2",
          solid = TRUE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("pyramidal2",
          solid = FALSE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("weeping",
          solid = TRUE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("weeping",
          solid = FALSE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("spreading1",
          solid = TRUE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("spreading1",
          solid = FALSE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("oval",
          solid = TRUE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("oval",
          solid = FALSE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("palm",
          solid = FALSE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("rounded",
          solid = FALSE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("spreading2",
          solid = FALSE,
          ambient_intensity = 0.3) |>
  render_tree_example()
-
+}
+if(tree3d:::run_documentation()) {
 tree_mesh("vase",
          solid = FALSE,
          ambient_intensity = 0.3) |>
  render_tree_example()
+}
 }

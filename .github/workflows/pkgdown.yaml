@@ -11,10 +11,6 @@ on:
 
 name: pkgdown
 
-figure:
-  fig.width: 8
-  fig.height: 8
-
 jobs:
   pkgdown:
     runs-on: ubuntu-latest

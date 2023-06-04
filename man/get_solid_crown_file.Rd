@@ -4,7 +4,11 @@
 \alias{get_solid_crown_file}
 \title{Get a Solid 3D Crown File}
 \usage{
-get_solid_crown_file(tree = "oval", resolution = "medium")
+get_solid_crown_file(
+  tree = "oval",
+  resolution = "medium",
+  offset_origin = TRUE
+)
 }
 \arguments{
 \item{tree}{Default \code{"oval"}. Crown type. Full list of options:
@@ -19,12 +23,18 @@ get_solid_crown_file(tree = "oval", resolution = "medium")
 \code{"low"}
 \code{"medium"}
 \verb{"high}}
+
+\item{offset_origin}{Default \code{TRUE}. Whether to offset the crown so that the bottom of the
+tree will be exactly at the origin, aligning it with the trunk.}
 }
 \value{
 Filename of OBJ file (as \code{.txt} file)
 }
 \description{
-Description
+Generate a specific 3D representation of a tree crown,
+given the parameters for the type of tree crown, the desired level of detail
+or resolution, and whether or not to offset the crown to align it with the
+trunk at the origin.
 }
 \examples{
 #Load an arrow OBJ

@@ -4,8 +4,8 @@ Title: 3D Tree Models
 Version: 0.1.0
 Authors@R: c(person("Tyler", "Morgan-Wall", email = "tylermw@gmail.com", 
     role = c("aut", "cph", "cre"), comment = c(ORCID = "0000-0002-3131-3814")),
-    person("Samantha", "Miller", role=c("aut", "cph")),
-    person("Agatha", "Czekajlo", role=c("aut", "cph")))
+    person("Samantha", "Miller", role=c("aut", "cph"), comment = c(ORCID = "0009-0001-1859-7146")),
+    person("Agatha", "Czekajlo", role=c("aut", "cph"), comment = c(ORCID = "0000-0001-7266-8286")))
 Maintainer: Tyler Morgan-Wall <tylermw@gmail.com>
 Description: Provides customizable 3D tree models (as 'OBJ' files) for visualization. Includes both planar and solid tree models, various crown types (columnar, oval, palm, pyramidal, rounded, spreading, vase, weeping), and options to change the diameter, height, and color of the tree's crown and trunk.  
 License: MIT + file LICENSE
@@ -16,5 +16,5 @@ RoxygenNote: 7.2.3
 Depends: 
     R (>= 2.10)
 Roxygen: list(markdown = TRUE)
-URL: https://tylermorganwall.github.io/elementslabtrees/
+URL: https://tylermorganwall.github.io/tree3d/
 Remotes: tylermorganwall/rayvertex
