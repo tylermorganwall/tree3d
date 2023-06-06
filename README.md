@@ -168,8 +168,9 @@ render_snapshot()
 <img src="man/figures/README-hq-1.png" width="100%" />
 
 ``` r
-render_highquality(min_variance = 1e-6,
-                   samples = 512, 
+render_highquality(min_variance = 0,
+                   sample_method = "sobol",
+                   samples = 2048, 
                    lightaltitude = 30,
                    lightdirection = 45)
 ```
@@ -266,3 +267,9 @@ render_snapshot()
 <img src="man/figures/README-lidar-2.png" width="100%" />
 
 ## Acknowledgements
+
+We would like to acknowledge the following people/organizations for
+their contributions to the package:
+
+elementslab (in the University of British Columbia) for supporting the
+development of the 3D tree models

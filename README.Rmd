@@ -135,8 +135,9 @@ for(i in seq_len(nrow(baseline_tree))) {
 }
 render_camera(40, 23,  0.10, 90)
 render_snapshot()
-render_highquality(min_variance = 1e-6,
-                   samples = 512, 
+render_highquality(min_variance = 0,
+                   sample_method = "sobol",
+                   samples = 2048, 
                    lightaltitude = 30,
                    lightdirection = 45)
 
@@ -204,7 +205,8 @@ for(i in seq_len(nrow(tree_locations))) {
 render_snapshot()
 ```
 
-
 ## Acknowledgements
 
+We would like to acknowledge the following people/organizations for their contributions to the package:
 
+elementslab (in the University of British Columbia) for supporting the development of the 3D tree models
