@@ -9,7 +9,7 @@ Authors@R: c(person("Tyler", "Morgan-Wall", email = "tylermw@gmail.com",
 Maintainer: Tyler Morgan-Wall <tylermw@gmail.com>
 Description: Provides customizable 3D tree models (as 'OBJ' files) for visualization. Includes both planar and solid tree models, various crown types (columnar, oval, palm, pyramidal, rounded, spreading, vase, weeping), and options to change the diameter, height, and color of the tree's crown and trunk.  
 License: MIT + file LICENSE
-Imports: rayvertex (>= 0.7.6)
+Imports: rayvertex (>= 0.7.8)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
