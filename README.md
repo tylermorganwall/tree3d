@@ -131,11 +131,13 @@ the trees.
 # Render the trees, using data from `baseline_tree` to draw each tree individually
 for(i in seq_len(nrow(baseline_tree))) {
   single_tree_info = baseline_tree[i,]
+  tree_defaults = get_tree_data(single_tree_info$CrownType)
   latlongheight = as.matrix(st_geometry(single_tree_info)[[1]])
   render_tree(long = latlongheight[1], lat = latlongheight[2], 
               extent = ext(dem), heightmap = dem_mat, 
               tree_height = single_tree_info$Height,
               crown_width = single_tree_info$Diameter,
+              trunk_height_ratio = tree_defaults$trunk_crown_ratio,
               custom_obj_crown = get_crown_file(tree = single_tree_info$CrownType),
               custom_obj_trunk = get_trunk_file())
 }
@@ -152,11 +154,13 @@ rayshader:. Here, we use the solid models.
 render_tree(clear_previous = TRUE)
 for(i in seq_len(nrow(baseline_tree))) {
   single_tree_info = baseline_tree[i,]
+  tree_defaults = get_tree_data(single_tree_info$CrownType)
   latlongheight = as.matrix(st_geometry(single_tree_info)[[1]])
   render_tree(long = latlongheight[1], lat = latlongheight[2], 
               extent = ext(dem), heightmap = dem_mat, 
               tree_height = single_tree_info$Height,
               crown_width = single_tree_info$Diameter,
+              trunk_height_ratio = tree_defaults$trunk_crown_ratio,
               custom_obj_crown = get_crown_file(tree = single_tree_info$CrownType,
                                                 solid = TRUE),
               custom_obj_trunk = get_trunk_file())

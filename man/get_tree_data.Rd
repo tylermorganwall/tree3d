@@ -4,7 +4,11 @@
 \alias{get_tree_data}
 \title{Get Tree Data}
 \usage{
-get_tree_data()
+get_tree_data(tree_name = NULL)
+}
+\arguments{
+\item{name}{Default \code{NULL}. The tree name, if only a single tree's info is needed. Otherwise,
+all trees are returned.}
 }
 \value{
 Returns a data frame.
@@ -15,4 +19,7 @@ This function retrieves a data frame of tree default data.
 \examples{
 # Fetch the tree data frame.
 get_tree_data()
+
+# Get single tree
+get_tree_data("palm")
 }
