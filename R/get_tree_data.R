@@ -2,7 +2,7 @@
 #'
 #' @description This function retrieves a data frame of tree default data.
 #'
-#' @param name Default `NULL`. The tree name, if only a single tree's info is needed. Otherwise,
+#' @param tree_name Default `NULL`. The tree name, if only a single tree's info is needed. Otherwise,
 #' all trees are returned.
 #'
 #' @export

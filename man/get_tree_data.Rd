@@ -7,7 +7,7 @@
 get_tree_data(tree_name = NULL)
 }
 \arguments{
-\item{name}{Default \code{NULL}. The tree name, if only a single tree's info is needed. Otherwise,
+\item{tree_name}{Default \code{NULL}. The tree name, if only a single tree's info is needed. Otherwise,
 all trees are returned.}
 }
 \value{
