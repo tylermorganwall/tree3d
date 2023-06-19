@@ -30,7 +30,13 @@ The tree model can be positioned, scaled, and rotated in 3D space."><!-- mathjax
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
-      <ul class="navbar-nav"></ul></div>
+      <ul class="navbar-nav"><li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/tylermorganwall/tree3d/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul></div>
 
     
   </div>
@@ -38,7 +44,7 @@ The tree model can be positioned, scaled, and rotated in 3D space."><!-- mathjax
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Generate a Tree Mesh</h1>
-      
+      <small class="dont-index">Source: <a href="https://github.com/tylermorganwall/tree3d/blob/HEAD/R/tree_mesh.R" class="external-link"><code>R/tree_mesh.R</code></a></small>
       <div class="d-none name"><code>tree_mesh.Rd</code></div>
     </div>
 
@@ -75,19 +81,7 @@ The tree model can be positioned, scaled, and rotated in 3D space.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>crown_type</dt>
-<dd><p>Default <code>"oval"</code>. Crown type (the leafy part of the tree). Full list of options:
-| <strong>3D/Flat</strong> | <strong>Name</strong> | <strong>Crown Color</strong> | <strong>Trunk/Crown Ratio</strong> |
-| :----------: | :----------------: | :--------: |
-| Both       | <code>"columnar"</code>   | <code>"#A2C683"</code> <img src="figures/columnar_square.png" alt="">   | 1/3 |
-| Both       | <code>"pyramidal1"</code> | <code>"#066038"</code> <img src="figures/pyramidal1_square.png" alt=""> | 1/6 |
-| Both       | <code>"pyramidal2"</code> | <code>"#447765"</code> <img src="figures/pyramidal2_square.png" alt=""> | 1/6 |
-| Both       | <code>"weeping"</code>    | <code>"#CBD362"</code> <img src="figures/weeping_square.png" alt="">    | 1/3 |
-| Both       | <code>"spreading1"</code> | <code>"#CCB471"</code> <img src="figures/spreading1_square.png" alt=""> | 1/3 |
-| Both       | <code>"oval"</code>       | <code>"#7CB262"</code> <img src="figures/oval_square.png" alt="">       | 1/3 |
-| Flat-only  | <code>"palm"</code>       | <code>"#DB8952"</code> <img src="figures/palm_square.png" alt="">       | 1/2 |
-| Flat-only  | <code>"rounded"</code>    | <code>"#E0A854"</code> <img src="figures/rounded_square.png" alt="">    | 1/3 |
-| Flat-only  | <code>"spreading2"</code> | <code>"#75C165"</code> <img src="figures/spreading2_square.png" alt=""> | 1/3 |
-| Flat-only  | <code>"vase"</code>       | <code>"#AECCB1"</code> <img src="figures/vase_square.png" alt="">       | 1/3 |</p></dd>
+<dd><p>Default <code>"oval"</code>. Crown type (the leafy part of the tree). Full list of options:</p><table class="table table"><tr><td><strong>3D/Flat</strong></td><td><strong>Name</strong></td><td><strong>Crown Color</strong></td><td><strong>Trunk Ratio</strong></td></tr><tr><td>Both</td><td><code>"columnar"</code></td><td><code>"#A2C683"</code> <img src="figures/columnar_square.png" alt=""></td><td>1/3</td></tr><tr><td>Both</td><td><code>"pyramidal1"</code></td><td><code>"#066038"</code> <img src="figures/pyramidal1_square.png" alt=""></td><td>1/6</td></tr><tr><td>Both</td><td><code>"pyramidal2"</code></td><td><code>"#447765"</code> <img src="figures/pyramidal2_square.png" alt=""></td><td>1/6</td></tr><tr><td>Both</td><td><code>"weeping"</code></td><td><code>"#CBD362"</code> <img src="figures/weeping_square.png" alt=""></td><td>1/3</td></tr><tr><td>Both</td><td><code>"spreading1"</code></td><td><code>"#CCB471"</code> <img src="figures/spreading1_square.png" alt=""></td><td>1/3</td></tr><tr><td>Both</td><td><code>"oval"</code></td><td><code>"#7CB262"</code> <img src="figures/oval_square.png" alt=""></td><td>1/3</td></tr><tr><td>Flat-only</td><td><code>"palm"</code></td><td><code>"#DB8952"</code> <img src="figures/palm_square.png" alt=""></td><td>1/2</td></tr><tr><td>Flat-only</td><td><code>"rounded"</code></td><td><code>"#E0A854"</code> <img src="figures/rounded_square.png" alt=""></td><td>1/3</td></tr><tr><td>Flat-only</td><td><code>"spreading2"</code></td><td><code>"#75C165"</code> <img src="figures/spreading2_square.png" alt=""></td><td>1/3</td></tr><tr><td>Flat-only</td><td><code>"vase"</code></td><td><code>"#AECCB1"</code> <img src="figures/vase_square.png" alt=""></td><td>1/3</td></tr></table></dd>
 
 
 <dt>position</dt>
