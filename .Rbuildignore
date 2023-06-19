@@ -2,11 +2,13 @@
 ^\.Rproj\.user$
 ^.+\.zip$
 ^.+\.obj$
-^.+\.png$
 ^LICENSE\.md$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
 ^\.github$
 ^README\.Rmd$
+^README\.md$
+^.+README.+$
 ^README_cache.+$
+^.+offset\.txt$

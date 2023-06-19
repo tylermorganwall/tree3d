@@ -17,3 +17,5 @@ Depends:
     R (>= 2.10)
 Roxygen: list(markdown = TRUE)
 URL: https://tylermorganwall.github.io/tree3d/
+BugReports: https://github.com/tylermorganwall/tree3d/issues
+
