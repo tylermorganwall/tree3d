@@ -7,7 +7,7 @@ Authors@R: c(person("Tyler", "Morgan-Wall", email = "tylermw@gmail.com",
     person("Samantha", "Miller", role=c("aut", "cph"), comment = c(ORCID = "0009-0001-1859-7146")),
     person("Agatha", "Czekajlo", role=c("aut", "cph"), comment = c(ORCID = "0000-0001-7266-8286")))
 Maintainer: Tyler Morgan-Wall <tylermw@gmail.com>
-Description: Provides customizable 3D tree models (as 'OBJ' files) for visualization. Includes both planar and solid tree models, various crown types (columnar, oval, palm, pyramidal, rounded, spreading, vase, weeping), and options to change the diameter, height, and color of the tree's crown and trunk.  
+Description: Provides customizable 3D tree models (as 'OBJ' files) for use in data visualization. Includes both planar and solid tree models, various crown types (columnar, oval, palm, pyramidal, rounded, spreading, vase, weeping), and options to change the diameter, height, and color of the tree's crown and trunk.  
 License: MIT + file LICENSE
 Imports: rayvertex (>= 0.7.8)
 Encoding: UTF-8
@@ -17,4 +17,3 @@ Depends:
     R (>= 2.10)
 Roxygen: list(markdown = TRUE)
 URL: https://tylermorganwall.github.io/tree3d/
-Remotes: tylermorganwall/rayvertex
