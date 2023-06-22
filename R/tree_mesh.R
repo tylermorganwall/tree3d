@@ -60,21 +60,21 @@
 #'                    #fsaa = 4, ssao = TRUE, ssao_intensity = 1,
 #'                    background = "lightblue")
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'#Render a basic 3D crown
 #'tree_mesh("columnar",
 #'          solid = TRUE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'#Render the 2D planar version
 #'tree_mesh("columnar",
 #'          solid = FALSE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'#Adjust the trunk/crown proportions of the overall tree using ratios
 #'tree_mesh("columnar",
 #'          tree_height = 1,
@@ -87,7 +87,7 @@
 #'
 #'}
 #'
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'#The crown width is set proportional to the crown height (not the overall tree)
 #'tree_mesh("columnar",
 #'          tree_height = 1,
@@ -99,7 +99,7 @@
 #'  render_tree_example()
 #'}
 #'
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'#Set the trunk and crown dimensions directly
 #'tree_mesh("columnar",
 #'          trunk_height = 0.25,
@@ -110,7 +110,7 @@
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'#Change the crown and trunk color
 #'tree_mesh("columnar",
 #'          solid = TRUE,
@@ -119,98 +119,98 @@
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'#Render different tree types, both 2D and 3D versions
 #'tree_mesh("columnar",
 #'          solid = TRUE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("columnar",
 #'          solid = FALSE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("pyramidal1",
 #'          solid = TRUE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("pyramidal1",
 #'          solid = FALSE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("pyramidal2",
 #'          solid = TRUE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("pyramidal2",
 #'          solid = FALSE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("weeping",
 #'          solid = TRUE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("weeping",
 #'          solid = FALSE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("spreading1",
 #'          solid = TRUE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("spreading1",
 #'          solid = FALSE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("oval",
 #'          solid = TRUE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("oval",
 #'          solid = FALSE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("palm",
 #'          solid = FALSE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("rounded",
 #'          solid = FALSE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("spreading2",
 #'          solid = FALSE,
 #'          ambient_intensity = 0.3) |>
 #'  render_tree_example()
 #'}
-#'if(tree3d:::run_documentation()) {
+#'if(run_documentation()) {
 #'tree_mesh("vase",
 #'          solid = FALSE,
 #'          ambient_intensity = 0.3) |>
