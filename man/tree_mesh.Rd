@@ -27,16 +27,16 @@ tree_mesh(
 \arguments{
 \item{crown_type}{Default \code{"oval"}. Crown type (the leafy part of the tree). Full list of options:\tabular{cccc}{
    \strong{3D/Flat} \tab \strong{Name} \tab \strong{Crown Color} \tab \strong{Trunk Ratio} \cr
-   Both \tab \code{"columnar"} \tab \code{"#A2C683"} \figure{columnar_square.png} \tab 1/3 \cr
-   Both \tab \code{"pyramidal1"} \tab \code{"#066038"} \figure{pyramidal1_square.png} \tab 1/6 \cr
-   Both \tab \code{"pyramidal2"} \tab \code{"#447765"} \figure{pyramidal2_square.png} \tab 1/6 \cr
-   Both \tab \code{"weeping"} \tab \code{"#CBD362"} \figure{weeping_square.png} \tab 1/3 \cr
-   Both \tab \code{"spreading1"} \tab \code{"#CCB471"} \figure{spreading1_square.png} \tab 1/3 \cr
-   Both \tab \code{"oval"} \tab \code{"#7CB262"} \figure{oval_square.png} \tab 1/3 \cr
-   Flat-only \tab \code{"palm"} \tab \code{"#DB8952"} \figure{palm_square.png} \tab 1/2 \cr
-   Flat-only \tab \code{"rounded"} \tab \code{"#E0A854"} \figure{rounded_square.png} \tab 1/3 \cr
-   Flat-only \tab \code{"spreading2"} \tab \code{"#75C165"} \figure{spreading2_square.png} \tab 1/3 \cr
-   Flat-only \tab \code{"vase"} \tab \code{"#AECCB1"} \figure{vase_square.png} \tab 1/3 \cr
+   Both \tab \code{"columnar"} \tab \code{"#A2C683"} \figure{columnarsquare.png} \tab 1/3 \cr
+   Both \tab \code{"pyramidal1"} \tab \code{"#066038"} \figure{pyramidal1square.png} \tab 1/6 \cr
+   Both \tab \code{"pyramidal2"} \tab \code{"#447765"} \figure{pyramidal2square.png} \tab 1/6 \cr
+   Both \tab \code{"weeping"} \tab \code{"#CBD362"} \figure{weepingsquare.png} \tab 1/3 \cr
+   Both \tab \code{"spreading1"} \tab \code{"#CCB471"} \figure{spreading1square.png} \tab 1/3 \cr
+   Both \tab \code{"oval"} \tab \code{"#7CB262"} \figure{ovalsquare.png} \tab 1/3 \cr
+   Flat-only \tab \code{"palm"} \tab \code{"#DB8952"} \figure{palmsquare.png} \tab 1/2 \cr
+   Flat-only \tab \code{"rounded"} \tab \code{"#E0A854"} \figure{roundedsquare.png} \tab 1/3 \cr
+   Flat-only \tab \code{"spreading2"} \tab \code{"#75C165"} \figure{spreading2square.png} \tab 1/3 \cr
+   Flat-only \tab \code{"vase"} \tab \code{"#AECCB1"} \figure{vasesquare.png} \tab 1/3 \cr
 }}
 
 \item{position}{Default \code{c(0,0,0)}. A length-3 numeric vector specifying the X, Y, and Z coordinates of the tree mesh in 3D space.}

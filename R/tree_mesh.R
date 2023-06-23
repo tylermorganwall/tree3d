@@ -8,16 +8,16 @@
 #' @param crown_type Default `"oval"`. Crown type (the leafy part of the tree). Full list of options:
 #'| **3D/Flat**  | **Name**           | **Crown Color**                            | **Trunk Ratio** |
 #'| :----------: | :----------------: | :----------------------------------------: | :-------------: |
-#'| Both         | `"columnar"`       | `"#A2C683"` \figure{columnar_square.png}   | 1/3             |
-#'| Both         | `"pyramidal1"`     | `"#066038"` \figure{pyramidal1_square.png} | 1/6             |
-#'| Both         | `"pyramidal2"`     | `"#447765"` \figure{pyramidal2_square.png} | 1/6             |
-#'| Both         | `"weeping"`        | `"#CBD362"` \figure{weeping_square.png}    | 1/3             |
-#'| Both         | `"spreading1"`     | `"#CCB471"` \figure{spreading1_square.png} | 1/3             |
-#'| Both         | `"oval"`           | `"#7CB262"` \figure{oval_square.png}       | 1/3             |
-#'| Flat-only    | `"palm"`           | `"#DB8952"` \figure{palm_square.png}       | 1/2             |
-#'| Flat-only    | `"rounded"`        | `"#E0A854"` \figure{rounded_square.png}    | 1/3             |
-#'| Flat-only    | `"spreading2"`     | `"#75C165"` \figure{spreading2_square.png} | 1/3             |
-#'| Flat-only    | `"vase"`           | `"#AECCB1"` \figure{vase_square.png}       | 1/3             |
+#'| Both         | `"columnar"`       | `"#A2C683"` \figure{columnarsquare.png}   | 1/3             |
+#'| Both         | `"pyramidal1"`     | `"#066038"` \figure{pyramidal1square.png} | 1/6             |
+#'| Both         | `"pyramidal2"`     | `"#447765"` \figure{pyramidal2square.png} | 1/6             |
+#'| Both         | `"weeping"`        | `"#CBD362"` \figure{weepingsquare.png}    | 1/3             |
+#'| Both         | `"spreading1"`     | `"#CCB471"` \figure{spreading1square.png} | 1/3             |
+#'| Both         | `"oval"`           | `"#7CB262"` \figure{ovalsquare.png}       | 1/3             |
+#'| Flat-only    | `"palm"`           | `"#DB8952"` \figure{palmsquare.png}       | 1/2             |
+#'| Flat-only    | `"rounded"`        | `"#E0A854"` \figure{roundedsquare.png}    | 1/3             |
+#'| Flat-only    | `"spreading2"`     | `"#75C165"` \figure{spreading2square.png} | 1/3             |
+#'| Flat-only    | `"vase"`           | `"#AECCB1"` \figure{vasesquare.png}       | 1/3             |
 #' @param solid Default `FALSE`. Whether the crown should be a solid mesh (`TRUE`), or a collection of flat
 #' 2D planes (`FALSE`).
 #' @param position Default `c(0,0,0)`. A length-3 numeric vector specifying the X, Y, and Z coordinates of the tree mesh in 3D space.
