@@ -5,7 +5,7 @@
 [![R-CMD-check](https://github.com/tylermorganwall/tree3d/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tylermorganwall/tree3d/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-# tree3d: 3D Tree Models
+# tree3d: 3D Tree Models <img src="man/figures/tree3d_hexlogo_small.png" align="right" />
 
 `tree3d` is an R package that provides highly customizable 3D tree
 models for data visualization and 3D scene creation. `tree3d` allows you
